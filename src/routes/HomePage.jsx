@@ -1,10 +1,9 @@
-import { useState } from "react";
 import { SmallPost } from "../components/Posts";
 import { Link } from "react-router-dom";
 import posts from "../data/posts";
 
 const HomePage = () => {
-  const [postList, setPostList] = useState(posts);
+  const postList = posts;
 
   const handleChange = (e) => {};
 

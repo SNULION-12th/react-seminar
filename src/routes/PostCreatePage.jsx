@@ -1,8 +1,7 @@
-import { useState } from "react";
 import posts from "../data/posts";
 
 const PostCreatePage = () => {
-  const [post, setPost] = useState({
+  const post = {
     id: posts.length,
     title: "",
     content: "",
@@ -10,7 +9,7 @@ const PostCreatePage = () => {
     tags: [],
     like_users: [],
     created_at: "2024-02-04T07:42:50.658501Z",
-  });
+  };
 
   const onSubmit = (e) => {
     alert("게시글을 등록합니다.");
