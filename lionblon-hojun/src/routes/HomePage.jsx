@@ -24,14 +24,13 @@ const HomePage = () => {
       </div>
       <div className="grid grid-cols-4 px-10 mt-10">
         {postList.map((post) => (
-          <div
+          <SmallPost
             key={post.id}
+            post={post}
             onClick={() => {
               nav(`/${post.id}`);
             }}
-          >
-            <SmallPost key={post.id} post={post} />
-          </div>
+          />
         ))}
       </div>
       <div className="flex justify-center m-20 button">
