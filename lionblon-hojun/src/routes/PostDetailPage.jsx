@@ -1,9 +1,10 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import posts from "../data/posts";
 import { useEffect, useState } from "react";
 
 const PostDetailPage = () => {
   const { postId } = useParams();
+  const nav = useNavigate();
 
   const [post, setPost] = useState(null);
   useEffect(() => {
@@ -43,7 +44,7 @@ const PostDetailPage = () => {
               type="reset"
               className="button mt-7"
               onClick={() => {
-                alert("수정");
+                nav(`/${postId}/edit`);
               }}
             >
               수정
