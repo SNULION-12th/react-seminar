@@ -14,3 +14,7 @@ export const SmallPost = ({ post }) => {
     </div>
   );
 };
+
+export const BigPost = () => {
+  return <div></div>;
+};
