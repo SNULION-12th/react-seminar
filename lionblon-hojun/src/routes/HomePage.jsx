@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { SmallPost } from "../compoents/Posts";
 import posts from "../data/posts";
 
@@ -24,7 +25,11 @@ const HomePage = () => {
           <SmallPost key={post.id} post={post} />
         ))}
       </div>
-      <div className="flex justify-center m-20 button">작성</div>
+      <div className="flex justify-center m-20 button">
+        <Link className="button" to="/create">
+          작성
+        </Link>
+      </div>
     </div>
   );
 };
