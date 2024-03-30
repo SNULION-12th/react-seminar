@@ -9,9 +9,13 @@ const Header = () => {
         <div className="text-white text-xl">SNULION BLOG</div>
       </Link>
       <div className="flex">
-        
-        <Link to="/signin" className="mr-10 p-3 uppercase text-lg">sign in</Link>
-        <Link to="/signup" className="mr-10 p-3 uppercase text-lg">sign up</Link>
+
+        <Link to="/signin" className="mr-10 p-3 uppercase text-lg">
+          sign in
+        </Link>
+        <Link to="/signup" className="mr-10 p-3 uppercase text-lg">
+          sign up
+        </Link>
       </div>
     </div>
   );

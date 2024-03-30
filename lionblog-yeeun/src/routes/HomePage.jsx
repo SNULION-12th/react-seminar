@@ -1,6 +1,6 @@
+import { Link } from "react-router-dom";
 import { SmallPost } from "../components/Posts";
 import posts from "../data/posts";
-
 
 const HomePage = () => {
   const postList = posts;

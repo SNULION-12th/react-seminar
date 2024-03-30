@@ -9,7 +9,7 @@ const SignUpPage = () => {
         <label htmlFor="email" className="label">
           *이메일:
         </label>
-        <input required type="text" id="email" className="input" />
+        <input required type="email" id="email" className="input" />
 
         <label required htmlFor="username" className="label">
           *유저 이름:
@@ -19,12 +19,17 @@ const SignUpPage = () => {
         <label htmlFor="password" className="label">
           *비밀번호:
         </label>
-        <input required type="text" id="password" className="input" />
+        <input required type="password" id="password" className="input" />
 
         <label htmlFor="confirm_password" className="label">
           *비밀번호 확인:
         </label>
-        <input required type="text" id="confirm_password" className="input" />
+        <input
+          required
+          type="password"
+          id="confirm_password"
+          className="input"
+        />
 
         <label htmlFor="college" className="label">
           대학:{" "}

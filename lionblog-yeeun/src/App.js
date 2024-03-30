@@ -1,13 +1,12 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+
 import Header from "./components/Header";
 import HomePage from "./routes/HomePage";
 import SignUpPage from "./routes/SignUpPage";
-
 import SignInPage from "./routes/SignInPage";
 import PostCreatePage from "./routes/PostCreatePage";
 import PostDetailPage from "./routes/PostDetailPage";
 import PostEditPage from "./routes/PostEditPage";
-
 import Footer from "./components/Footer";
 import "./App.css";
 

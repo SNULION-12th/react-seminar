@@ -1,5 +1,7 @@
 const PostDetailPage = () => {
-  return <div>Post Detail Page</div>;
+	return (
+		<div>Post Detail Page</div>
+	);
 };
 
 export default PostDetailPage;
