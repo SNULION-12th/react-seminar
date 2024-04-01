@@ -1,6 +1,10 @@
+import { useNavigate } from "react-router-dom";
+
 const SignUpPage = () => {
+  const nav = useNavigate();
   const handleSignUpSubmit = () => {
     alert("회원가입 하기"); // TODO: add api call for sign up
+    nav("/");
   };
 
   return (
@@ -42,7 +46,7 @@ const SignUpPage = () => {
         </label>
         <input type="text" id="major" className="input" />
 
-        <div className="flex flex-row items-center gap-5">
+        <div className="flex flex-row items-center gap-5 mb-8">
           <button type="reset" className="button mt-7">
             초기화
           </button>
