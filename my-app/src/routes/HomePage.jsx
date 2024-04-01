@@ -1,9 +1,10 @@
 import { SmallPost } from "../components/Posts";
 import posts from "../data/posts";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const HomePage = () => {
   const postList = posts;
+  const nav = useNavigate();
   const handleChange = (e) => {};
 
   return (
@@ -21,7 +22,13 @@ const HomePage = () => {
       </div>
       <div className="grid grid-cols-4 px-10 mt-10">
         {postList.map((post) => (
-          <SmallPost key={post.id} post={post} />
+          <SmallPost
+            key={post.id}
+            post={post}
+            onClick={() => {
+              nav(`/${post.id}`);
+            }}
+          />
         ))}
       </div>
       <div className="flex justify-center m-20">
