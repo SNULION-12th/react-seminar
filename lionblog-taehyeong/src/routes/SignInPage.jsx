@@ -1,6 +1,6 @@
 const SignInPage = () => {
   return (
-    <main className="flex flex-col items-center max-w-3xl w-screen">
+    <main className="main-container">
       <h3 className="font-bold text-2xl">로그인</h3>
       <form className="form gap-2" method="POST" action="/api/account/signin">
         <label htmlFor="username" className="label">
