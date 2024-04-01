@@ -19,7 +19,7 @@ const PostCreatePage = () => {
           placeholder="제목을 입력하세요"
           className="input"
         />
-        <label required className="label">
+        <label required className="label" htmlFor="contents">
           내용
         </label>
         <input

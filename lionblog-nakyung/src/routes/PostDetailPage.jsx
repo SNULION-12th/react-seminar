@@ -26,7 +26,7 @@ const PostDetailPage = () => {
           <button className="button m-7" onClick={handleDelete}>
             삭제
           </button>
-          <Link className="button m-7" to="/:postId/edit">
+          <Link className="button m-7" to={`/${postId}/edit`}>
             수정
           </Link>
         </div>
