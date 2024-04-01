@@ -14,10 +14,6 @@ const PostDetailPage = () => {
     setPost(post);
   }, [postId]);
 
-  const handleLike = () => {
-    alert("좋아요");
-  };
-
   const handleDelete = () => {
     alert("삭제");
   };
