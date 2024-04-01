@@ -12,6 +12,7 @@ const PostCreatePage = () => {
         like_users: [],
         created_at: "",
       }}
+      mode="작성"
     />
   );
 };

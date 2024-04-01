@@ -12,7 +12,7 @@ const PostEditPage = () => {
     if (data) setPost(data);
   }, [post]);
 
-  return post && <PostCUTemplate initial={{ ...post }} />;
+  return post && <PostCUTemplate initial={{ ...post }} mode="수정" />;
 };
 
 export default PostEditPage;

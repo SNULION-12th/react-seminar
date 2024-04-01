@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-export const PostCUTemplate = ({ initial }) => {
+export const PostCUTemplate = ({ initial, mode }) => {
+  const navigate = useNavigate();
   const [post, setPost] = useState(initial);
 
   const updateTempTag = (e) => setPost({ ...post, temp_tag: e.target.value });
@@ -22,13 +24,23 @@ export const PostCUTemplate = ({ initial }) => {
     setPost({ ...post, tags: afterDeleted });
   };
 
+  const onSumbitMethod = (mode) => {
+    if (mode === "작성") {
+      alert("게시물을 등록합니다.");
+    } else if (mode === "수정") alert("게시물을 수정합니다.");
+    navigate("/");
+  };
+
   return (
     <main className="main-container">
-      <h3 className="font-bold text-2xl">게시글 작성</h3>
+      <h3 className="font-bold text-2xl">게시글 {mode}</h3>
       <form
         method="POST"
         className="form gap-2"
-        onSubmit={() => alert("게시글을 등록합니다.")}
+        onSubmit={(e) => {
+          e.preventDefault();
+          onSumbitMethod(mode);
+        }}
       >
         <label htmlFor="title" className="label">
           제목
