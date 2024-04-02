@@ -14,7 +14,7 @@ const PostEditPage = () => {
   const handlePostEdit = () => {
     alert("게시물을 수정합니다.");
   };
- 
+
   return (
     post && (
       <div className="flex flex-col items-center w-1/2">
@@ -45,21 +45,22 @@ const PostEditPage = () => {
           <label htmlFor="tag" className="label">
             태그
           </label>
+					<div className="flex space-between w-full">
           <input
             type="text"
             id="tag"
-            className="input"
+            className="input mr-3"
             placeholder="태그를 추가하세요"
           />
+          <button className="mt-1 ml-1">add</button>
+					</div>
           <div className="flex flex-wrap mt-5 justify-start">
             {post.tags.map((tag) => (
               <div key={tag.id} className="flex items-center">
                 <span className="bg-slate-300 rounded-3xl text-black p-2 m-1">
                   #{tag.content}
                 </span>
-                <button className="mt-1 ml-1">
-                  X
-                </button>
+                <button className="mt-1 ml-1">X</button>
               </div>
             ))}
           </div>
