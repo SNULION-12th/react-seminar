@@ -30,7 +30,7 @@ const SignUpPage = () => {
   return (
     <div className="flex flex-col items-center w-1/2">
       <h3 className="font-bold text-2xl">회원가입</h3>
-      <form className="form gap-2" id = "sign-up-form" onSubmit={handleSignUpSubmit} onReset={handleSignUpResest}>
+      <form className="form gap-2" id = "sign-up-form" onSubmit={handleSignUpSubmit.preventdefault} onReset={handleSignUpResest.preventdefault}>
         <label htmlFor="email" className="label">
           *이메일:
         </label>

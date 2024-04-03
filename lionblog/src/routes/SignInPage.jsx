@@ -17,7 +17,6 @@ const SignInPage = () => {
     } catch (e) {
       console.log("아직 API가 세팅되지 않았습니다!" + e);
     }
-
   };
 
   const handleReset = () => {
@@ -27,7 +26,7 @@ const SignInPage = () => {
   return (
     <div className="flex flex-col items-center w-1/2">
       <h3 className="font-bold text-2xl">로그인</h3>
-      <form className="form gap-2" id = "sign-in-form" onSubmit={handleSignInSubmit} onReset={handleReset}>
+      <form className="form gap-2" id = "sign-in-form" onSubmit={handleSignInSubmit.preventdefault} onReset={handleReset.preventdefault}>
 
         <label required htmlFor="username" className="label">
           *유저 이름:
