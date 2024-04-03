@@ -11,7 +11,7 @@ const HomePage = () => {
     <div>
       <div className="flex flex-col justify-center items-center mb-5">
         <div className="w-full mb-16 flex justify-center">
-          <h1 className="uppercase text-6xl text-white">my blog</h1>
+          <h1 className="uppercase text-6xl">my blog</h1>
         </div>
         <input
           type="text"

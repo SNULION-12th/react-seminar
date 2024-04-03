@@ -7,8 +7,8 @@ export const SmallPost = ({ post }) => {
   return (
     <Link
       to={`/${post.id}`}
-      className={`post-transition w-64 relative block group py-10 px-8 mr-5 my-5 ring-8 ring-transparent border-2 border-box hover:bg-orange-400 hover:text-black hover:border-transparent hover:ring-orange-200 rounded-xl font-medium ${
-        darkMode ? "border-white" : "border-black"
+      className={`w-64 relative block group py-10 px-8 mr-5 my-5 ring-8 ring-transparent border-2 border-box hover:bg-orange-400 hover:text-black hover:border-transparent hover:ring-orange-200 rounded-xl font-medium ${
+        darkMode ? "post-dark" : "post-light"
       }`}
     >
       <h1 className="font-extrabold text-2xl truncate">{post.title}</h1>
