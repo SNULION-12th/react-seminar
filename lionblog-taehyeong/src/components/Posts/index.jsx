@@ -29,7 +29,7 @@ export const BigPost = ({ post, date }) => {
   const alertLike = () => alert("좋아요");
 
   return (
-    <article className="py-10 px-8 mr-5 my-5 w-full bg-orange-400 ring-8 ring-transparent border-2 border-box border-white rounded-xl text-black">
+    <article className="py-10 px-8 my-5 w-full bg-orange-400 ring-8 ring-transparent border-2 box-border border-white rounded-xl text-black">
       <div className="flex flex-row justify-between mb-4 items-center">
         <span className="text-3xl font-bold">
           {post.author.username}의 {post.title}
@@ -44,7 +44,7 @@ export const BigPost = ({ post, date }) => {
           </span>
         ))}
       </div>
-      <span class="hover:cursor-pointer" onClick={alertLike}>
+      <span className="hover:cursor-pointer" onClick={alertLike}>
         ❤️ {post.like_users.length}
       </span>
     </article>

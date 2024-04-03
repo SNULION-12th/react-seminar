@@ -33,7 +33,7 @@ const PostDetailPage = () => {
   }, [post]);
 
   return (
-    <main className="flex flex-col items-center max-w-3xl w-screen">
+    <main className="flex flex-col items-center max-w-3xl w-screen grow">
       <form className="form">
         {post && (
           <>
