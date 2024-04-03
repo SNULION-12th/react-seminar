@@ -86,9 +86,9 @@ export const PostWriteTemplate = ({ initial, mode }) => {
         {post.tags.length > 0 && (
           <div className="flex flex-row w-full">
             {post.tags.map((tag) => (
-              <div key={tag.id} className="flex flex-row">
+              <div key={tag.id} className="flex flex-row animate-tag_bounce">
                 <label
-                  className="tag bg-white text-black m-1"
+                  className="tag bg-white text-black m-1 "
                   id={`tag_${tag.id}`}
                 >
                   {tag.content}
