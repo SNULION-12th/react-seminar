@@ -20,7 +20,7 @@ const HomePage = () => {
           className="border border-orange-400 outline-none rounded-2xl text-center py-2 px-20 text-orange-400 bg-transparent"
         />
       </div>
-      <div className="grid grid-cols-4 px-10 mt-10">
+      <div className="justify-center grid grid-cols-4">
         {postList.map((post) => (
           <SmallPost key={post.id} post={post} />
         ))}

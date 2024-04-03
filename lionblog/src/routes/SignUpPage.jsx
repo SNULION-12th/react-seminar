@@ -1,12 +1,36 @@
 const SignUpPage = () => {
   const handleSignUpSubmit = () => {
-    alert("회원가입 하기"); // TODO: add api call for sign up
+    alert("회원가입 하기");
+    try{
+      fetch('/api/account/signup/', {
+        method: 'POST',
+        body: JSON.stringify({
+        'email' : document.getElementById('email'),
+        'username' : document.getElementById('username'),
+        'password' : document.getElementById('password'),
+        'college' : document.getElementById('college'),
+        'major' : document.getElementById('major')
+        }),
+        headers: {
+        'Authorization' : "Custom Token"
+        }
+      })
+      .then((response) => response.json())
+      .then((json) => console.log(json));
+    } catch (e) {
+      console.log("API가 아직 설정되지 않았습니다!" + e);
+    }
+
   };
+
+  const handleSignUpResest = () => {
+      document.getElementById("sign-up-form").reset();
+  }
 
   return (
     <div className="flex flex-col items-center w-1/2">
       <h3 className="font-bold text-2xl">회원가입</h3>
-      <form className="form gap-2" onSubmit={handleSignUpSubmit}>
+      <form className="form gap-2" id = "sign-up-form" onSubmit={handleSignUpSubmit} onReset={handleSignUpResest}>
         <label htmlFor="email" className="label">
           *이메일:
         </label>
