@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
 import { useContext } from "react";
-import { DarkModeContext } from "../../App";
+import { DarkModeContext, PostsDataContext } from "../../App";
 
 export const SmallPost = ({ post }) => {
   const darkMode = useContext(DarkModeContext);
+
   return (
     <Link
       to={`/${post.id}`}
@@ -14,19 +15,29 @@ export const SmallPost = ({ post }) => {
       <h1 className="font-extrabold text-2xl truncate">{post.title}</h1>
       <p className="mt-2">{post.author.username}</p>
       <div className="flex flex-wrap mt-5">
-        {post.tags.map((tag) => (
-          <span key={tag.id} className="tag m-1">
-            #{tag.content}
-          </span>
-        ))}
+        {post.tags.map(
+          (tag) =>
+            tag && (
+              <span key={tag.id} className="tag m-1">
+                #{tag.content}
+              </span>
+            )
+        )}
       </div>
       <div>{post.like_users.length > 0 && `❤️ ${post.like_users.length}`}</div>
     </Link>
   );
 };
 
-export const BigPost = ({ post, date }) => {
-  const alertLike = () => alert("좋아요");
+export const BigPost = ({ post, date, updater }) => {
+  const posts = useContext(PostsDataContext);
+  const alertLike = () => {
+    alert("좋아요");
+    post.like_users.push(6);
+    updater({ ...post });
+
+    console.log(posts);
+  };
 
   return (
     <article className="py-10 px-8 my-5 w-full bg-orange-400 ring-8 ring-transparent border-2 box-border border-white rounded-xl text-black">
@@ -38,11 +49,14 @@ export const BigPost = ({ post, date }) => {
       </div>
       <input className="post-content mb-4 " defaultValue={post.content}></input>
       <div className="flex flex-row flex-wrap">
-        {post.tags.map((tag) => (
-          <span key={tag.id} className="tag m-1">
-            #{tag.content}
-          </span>
-        ))}
+        {post.tags.map(
+          (tag) =>
+            tag && (
+              <span key={tag.id} className="tag m-1">
+                #{tag.content}
+              </span>
+            )
+        )}
       </div>
       <span className="hover:cursor-pointer" onClick={alertLike}>
         ❤️ {post.like_users.length}

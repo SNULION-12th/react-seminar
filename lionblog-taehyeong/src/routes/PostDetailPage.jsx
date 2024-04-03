@@ -44,7 +44,7 @@ const PostDetailPage = () => {
       <form className="form">
         {post && (
           <>
-            <BigPost post={post} date={date} />
+            <BigPost post={post} updater={setPost} date={date} />
             <div className="flex flex-row justify-center gap-5">
               <Link to={`/${postId}/edit`}>
                 <button className="button">수정</button>

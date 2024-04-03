@@ -1,16 +1,18 @@
 import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { DarkModeContext } from "../../App";
+import { DarkModeContext, PostsDataContext } from "../../App";
 
 export const PostWriteTemplate = ({ initial, mode }) => {
   const navigate = useNavigate();
   const [post, setPost] = useState(initial);
   const darkMode = useContext(DarkModeContext);
+  const posts = useContext(PostsDataContext);
 
   const updateTempTag = (e) => setPost({ ...post, temp_tag: e.target.value });
   const updateTags = () => {
     const data = { ...post };
-    const tagSorted = data.tags.sort((a, b) => a - b);
+    const validTags = data.tags.filter((tag) => !!tag);
+    const tagSorted = validTags.sort((a, b) => a.id - b.id);
 
     data.tags.push({
       id: tagSorted.length === 0 ? 1 : tagSorted[tagSorted.length - 1].id + 1,
@@ -22,14 +24,35 @@ export const PostWriteTemplate = ({ initial, mode }) => {
   const updateTitle = (e) => setPost({ ...post, title: e.target.value });
   const updateContent = (e) => setPost({ ...post, content: e.target.value });
   const deleteTag = (tagId) => {
-    const afterDeleted = post.tags.filter((tag) => tag.id !== tagId);
+    const data = { ...post };
+    const afterDeleted = data.tags.filter((tag) => tag && tag.id !== tagId);
     setPost({ ...post, tags: afterDeleted });
+    // data.tags.forEach((tag, index, array) => {
+    //   if (tag && tag.id === tagId) array[index] = null;
+    // });
   };
 
   const onSumbitMethod = (mode) => {
     if (mode === "작성") {
       alert("게시물을 등록합니다.");
-    } else if (mode === "수정") alert("게시물을 수정합니다.");
+      // posts.push()
+      const validPosts = posts.filter((post) => !!post);
+      const newId =
+        validPosts.sort((a, b) => a.id - b.id)[validPosts.length - 1].id + 1;
+      const author = { id: 6, username: "태형" };
+      const created_at = new Date();
+      posts.push({
+        ...post,
+        id: newId,
+        author: author,
+        created_at: created_at,
+      });
+    } else if (mode === "수정") {
+      alert("게시물을 수정합니다.");
+      posts.forEach((p, i, arr) => {
+        if (p && p.id === post.id) arr[i] = { ...post };
+      });
+    }
     navigate("/");
   };
 
@@ -85,19 +108,25 @@ export const PostWriteTemplate = ({ initial, mode }) => {
         </div>
         {post.tags.length > 0 && (
           <div className="flex flex-row w-full">
-            {post.tags.map((tag) => (
-              <div key={tag.id} className="flex flex-row animate-tag_bounce">
-                <label
-                  className="tag bg-white text-black m-1 "
-                  id={`tag_${tag.id}`}
-                >
-                  {tag.content}
-                </label>
-                <button type="button" onClick={() => deleteTag(tag.id)}>
-                  X
-                </button>
-              </div>
-            ))}
+            {post.tags.map(
+              (tag) =>
+                tag && (
+                  <div
+                    key={tag.id}
+                    className="flex flex-row animate-tag_bounce"
+                  >
+                    <label
+                      className="tag bg-white text-black m-1 "
+                      id={`tag_${tag.id}`}
+                    >
+                      {tag.content}
+                    </label>
+                    <button type="button" onClick={() => deleteTag(tag.id)}>
+                      X
+                    </button>
+                  </div>
+                )
+            )}
           </div>
         )}
         <button type="submit" className="button">
