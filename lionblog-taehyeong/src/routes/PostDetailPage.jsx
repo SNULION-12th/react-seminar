@@ -1,12 +1,20 @@
 import posts from "../data/posts";
 import { BigPost } from "../components/Posts";
 import { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 
 const PostDetailPage = () => {
+  const navigate = useNavigate();
+
   const [post, setPost] = useState(null);
   const { postId } = useParams();
   const [date, setDate] = useState(null);
+
+  const handleDelete = (e) => {
+    e.preventDefault();
+    alert("게시글 삭제");
+    navigate("/");
+  };
 
   useEffect(() => {
     const post = posts.find((post) => post.id === parseInt(postId));
@@ -35,7 +43,7 @@ const PostDetailPage = () => {
                 <button className="button">수정</button>
               </Link>
 
-              <button type="submit" className="button">
+              <button type="submit" className="button" onClick={handleDelete}>
                 삭제
               </button>
             </div>

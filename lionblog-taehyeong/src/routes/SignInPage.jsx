@@ -1,8 +1,23 @@
+import { useNavigate } from "react-router-dom";
+
 const SignInPage = () => {
+  const navigate = useNavigate();
+
+  const handleSignin = (e) => {
+    e.preventDefault();
+    alert("로그인 하기");
+    navigate("/");
+  };
+
   return (
     <main className="main-container">
       <h3 className="font-bold text-2xl">로그인</h3>
-      <form className="form gap-2" method="POST" action="/api/account/signin">
+      <form
+        className="form gap-2"
+        method="POST"
+        action="/api/account/signin"
+        onSubmit={handleSignin}
+      >
         <label htmlFor="username" className="label">
           *유저 이름:
         </label>
