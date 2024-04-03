@@ -1,8 +1,8 @@
-import { PostCUTemplate } from "../components/PostCUTemplate";
+import { PostWriteTemplate } from "../components/PostWriteTemplate";
 
 const PostCreatePage = () => {
   return (
-    <PostCUTemplate
+    <PostWriteTemplate
       initial={{
         id: 0,
         title: "",

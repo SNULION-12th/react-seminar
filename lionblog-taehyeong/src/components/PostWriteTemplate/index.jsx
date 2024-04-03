@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { DarkModeContext } from "../../App";
 
-export const PostCUTemplate = ({ initial, mode }) => {
+export const PostWriteTemplate = ({ initial, mode }) => {
   const navigate = useNavigate();
   const [post, setPost] = useState(initial);
+  const darkMode = useContext(DarkModeContext);
 
   const updateTempTag = (e) => setPost({ ...post, temp_tag: e.target.value });
   const updateTags = () => {
@@ -49,7 +51,7 @@ export const PostCUTemplate = ({ initial, mode }) => {
           type="text"
           id="title"
           required
-          className="input"
+          className={`input ${darkMode ? "input-dark" : "input-light"}`}
           placeholder="제목을 입력하세요."
           onChange={updateTitle}
           value={post.title}
@@ -61,7 +63,7 @@ export const PostCUTemplate = ({ initial, mode }) => {
           id="content"
           cols="30"
           rows="10"
-          className="input"
+          className="input textarea"
           placeholder="내용을 입력하세요."
           value={post.content}
           onChange={updateContent}

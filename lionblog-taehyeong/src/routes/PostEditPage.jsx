@@ -1,4 +1,4 @@
-import { PostCUTemplate } from "../components/PostCUTemplate";
+import { PostWriteTemplate } from "../components/PostWriteTemplate";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import posts from "../data/posts";
@@ -12,7 +12,7 @@ const PostEditPage = () => {
     if (data) setPost(data);
   }, [post]);
 
-  return post && <PostCUTemplate initial={{ ...post }} mode="수정" />;
+  return post && <PostWriteTemplate initial={{ ...post }} mode="수정" />;
 };
 
 export default PostEditPage;

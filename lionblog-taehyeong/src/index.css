@@ -29,7 +29,19 @@
 }
 /* 모든 input 일괄 적용 */
 .input {
-  @apply border-2 border-white w-full px-6 py-3 rounded-2xl text-white bg-transparent placeholder-opacity-50 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-transparent;
+  @apply border-2  w-full px-6 py-3 rounded-2xl bg-transparent placeholder-opacity-50 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-transparent;
+}
+
+.input-dark {
+  @apply border-white text-white;
+}
+
+.input-light {
+  @apply text-black;
+}
+
+.textarea {
+  @apply resize-none;
 }
 
 .post-content {
@@ -37,7 +49,7 @@
 }
 
 .main-container {
-  @apply flex flex-col items-center max-w-3xl w-screen;
+  @apply flex flex-col items-center max-w-3xl w-screen grow;
 }
 
 .light {
