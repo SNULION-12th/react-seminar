@@ -14,28 +14,6 @@
   transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
 }
 
-@keyframes post-light {
-  100% {
-    border: 2px solid black;
-  }
-}
-
-@keyframes post-dark {
-  100% {
-    border: 2px solid white;
-  }
-}
-
-.post-light {
-  animation: post-light 0.5s ease-in-out;
-  animation-fill-mode: forwards;
-}
-
-.post-dark {
-  animation: post-dark 0.5s ease-in-out;
-  animation-fill-mode: forwards;
-}
-
 /* .header {
   transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
 } */
