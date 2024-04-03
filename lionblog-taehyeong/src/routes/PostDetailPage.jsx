@@ -1,10 +1,12 @@
-import posts from "../data/posts";
+// import posts from "../data/posts";
 import { BigPost } from "../components/Posts";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
+import { PostsDataContext } from "../App";
 
 const PostDetailPage = () => {
   const navigate = useNavigate();
+  const posts = useContext(PostsDataContext);
 
   const [post, setPost] = useState(null);
   const { postId } = useParams();
@@ -13,11 +15,16 @@ const PostDetailPage = () => {
   const handleDelete = (e) => {
     e.preventDefault();
     alert("게시글 삭제");
+    posts.forEach((p, index, posts) => {
+      if (p === post) posts[index] = null;
+      console.log(posts);
+    });
+
     navigate("/");
   };
 
   useEffect(() => {
-    const post = posts.find((post) => post.id === parseInt(postId));
+    const post = posts.find((post) => post && post.id === parseInt(postId));
     if (post) setPost(post);
   }, [postId]);
 
