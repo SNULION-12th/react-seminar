@@ -1,0 +1,18 @@
+.App {
+  height: 100vh;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Control {
+  margin-right: 30px;
+}
+
+.Result {
+  margin-left: 30px;
+  padding: 15px 30px;
+  background-color: black;
+  color: white;
+}
