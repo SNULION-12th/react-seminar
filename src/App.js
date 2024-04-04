@@ -28,36 +28,104 @@ function App() {
   // You can see that console log is called everytime we refresh the page (You can see the log in the browser console (F12))
   console.log("App is rendered");
 
-  // Now let us use useState to create the counters
-  // You can understand useState as a memory for the browser to store data (once browser refreshes, the data is gone)
+  // You can see that console log is called everytime we refresh the page (You can see the log in the browser console (F12))
+  console.log("App is rendered");
 
-  // What to do
-  // 1. Implement 3 counters for Manager, Staff and Guest
-  // 2. Implement a function to calculate whether the market is operatable or not
-  //    The conditions are as follows:
-  //    - (guestCount > staffCount * maxGuestsPerStaff) && (staffCount > managerCount * maxStaffsPerManager)
-  //      => Market is not operatable
-  // 3. Control the counters in the Control Part and show the result in the Result Part
+  // You may use let variable inside a react functional component
+  // But an update to a let variable will not trigger a re-render
+  // Our counters
+  const [guestCount, setGuestCount] = useState(0);
+  const [managerCount, setManagerCount] = useState(1);
+  const [staffCount, setStaffCount] = useState(1);
+
+  // First try to console log the guestCount only when it is updated
+  // Uncomment the below code and see the console log
+  // useEffect(() => {
+  //   console.log(`Guest count has changed to ${guestCount}!`);
+  // }, [guestCount]);
+
+  // Change the below code by using useEffect
   let isMoreStaffNeeded = false;
+  if (guestCount > staffCount * maxGuestsPerStaff) {
+    console.log("More staff needed");
+    isMoreStaffNeeded = true;
+  } else {
+    console.log("No need for more staff");
+    isMoreStaffNeeded = false;
+  }
+
   let isMoreManagerNeeded = false;
+  if (staffCount > managerCount * maxStaffsPerManager) {
+    console.log("More manager needed");
+    isMoreManagerNeeded = true;
+  } else {
+    console.log("No need for more manager");
+    isMoreManagerNeeded = false;
+  }
+
   let isMarketOpen = true;
+  if (isMoreManagerNeeded || isMoreStaffNeeded) {
+    console.log("Market is closed");
+    isMarketOpen = false;
+  } else {
+    console.log("Market is open");
+    isMarketOpen = true;
+  }
+
+  const incrementGuestCount = () => {
+    setGuestCount(guestCount + 1);
+  };
+
+  const decrementGuestCount = () => {
+    setGuestCount(guestCount - 1);
+  };
+
+  const incrementManagerCount = () => {
+    setManagerCount(managerCount + 1);
+  };
+
+  const decrementManagerCount = () => {
+    setManagerCount(managerCount - 1);
+  };
+
+  const incrementStaffCount = () => {
+    setStaffCount(staffCount + 1);
+  };
+
+  const decrementStaffCount = () => {
+    setStaffCount(staffCount - 1);
+  };
 
   return (
     <div className="App">
       <div className="Control">
+        {/* Manager Component */}
         <div>
-          {/* Example div for one manager counter. You must fill in {} and () => {} */}
-          <h2>Managers: {}</h2>
+          <h2>Managers: {managerCount}</h2>
           <div>
-            <button onClick={() => {}}>Increment</button>
-            <button onClick={() => {}}>Decrement</button>
+            <button onClick={incrementManagerCount}>Increment</button>
+            <button onClick={decrementManagerCount}>Decrement</button>
           </div>
         </div>
-        {/* Implement other counters: Staffs, Guests */}
+        {/* Staff Component */}
+        <div>
+          <h2>Staffs: {staffCount}</h2>
+          <div>
+            <button onClick={incrementStaffCount}>Increment</button>
+            <button onClick={decrementStaffCount}>Decrement</button>
+          </div>
+        </div>
+        {/* Guest Component */}
+        <div>
+          <h2>Guests: {guestCount}</h2>
+          <div>
+            <button onClick={incrementGuestCount}>Increment</button>
+            <button onClick={decrementGuestCount}>Decrement</button>
+          </div>
+        </div>
       </div>
       <div className="Result">
         <h2>
-          {/* You can use ternary operator to dynamically render div content */}
           Market Status: <span>{isMarketOpen ? "OPEN" : "CLOSED"}</span>
         </h2>
         <h4>{isMoreStaffNeeded ? "Not enough staff" : ""}</h4>
