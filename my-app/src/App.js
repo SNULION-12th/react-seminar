@@ -1,9 +1,9 @@
 import "./App.css";
 import Header from "./components/Header";
-import Footer from "./components/Footer";
 import HomePage from "./routes/HomePage";
+import Footer from "./components/Footer";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import SignUpPage from "./routes/SignUpPage";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
 import SignInPage from "./routes/SignInPage";
 import PostCreatePage from "./routes/PostCreatePage";
 import PostDetailPage from "./routes/PostDetailPage";
@@ -24,9 +24,6 @@ function App() {
         </Routes>
         <Footer />
       </BrowserRouter>
-      {/* <Header />
-      <HomePage />
-      <Footer /> */}
     </div>
   );
 }
