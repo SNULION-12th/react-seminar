@@ -13,7 +13,7 @@ const PostCreatePage = () => {
 
   const onSubmit = (e) => {
     alert("게시글을 등록합니다.");
-    //TODO : api connect(post post)
+    //TODO : api connect(create post)
   };
 
   return (
@@ -27,7 +27,7 @@ const PostCreatePage = () => {
           type="text"
           placeholder="제목을 입력하세요"
           id="title"
-          defaultValue={post.title}
+          value={post.title}
           className="input"
           required
         />
@@ -37,7 +37,7 @@ const PostCreatePage = () => {
         <textarea
           placeholder="내용을 입력하세요"
           id="content"
-          defaultValue={post.content}
+          value={post.content}
           cols="30"
           rows="10"
           className="input"
