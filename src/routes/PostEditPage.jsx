@@ -6,7 +6,7 @@ const PostEditPage = () => {
   const { postId } = useParams();
   const [post, setPost] = useState({});
 
-  // 기존 게시물 불러오기
+  // 기존 게시글 불러오기
   useEffect(() => {
     const post = posts.find((post) => post.id === parseInt(postId));
     const originalPost = { ...post, tags: post.tags.map((tag) => tag.content) };
@@ -14,7 +14,7 @@ const PostEditPage = () => {
   }, [postId]);
 
   const onSubmit = (e) => {
-    alert("게시물을 수정합니다.");
+    alert("게시글을 수정합니다.");
     // TODO : api connect(edit post)
   };
 
