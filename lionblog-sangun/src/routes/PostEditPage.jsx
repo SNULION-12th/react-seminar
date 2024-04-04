@@ -7,6 +7,14 @@ const PostEditPage = () => {
     alert("게시물을 수정합니다."); // TODO: add api call for sign in
   };
 
+  const handleTagsAdd = () => {
+    alert("태그 추가"); // TODO: add api call for sign in
+  };
+
+  const handleTagDelete = () => {
+    alert("태그 삭제"); // TODO: add api call for sign in
+  };
+
   const { postId } = useParams();
 
   const [post, setPost] = useState(null);
@@ -48,7 +56,7 @@ const PostEditPage = () => {
           </label>
           <div className="flex w-full">
             <input id="tag" className="input" placeholder="태그를 추가하세요" />
-            <button type="button" className="w-20">
+            <button onClick={handleTagsAdd} type="button" className="w-20">
               add
             </button>
           </div>
@@ -61,7 +69,9 @@ const PostEditPage = () => {
                 >
                   #{tag.content}
                 </div>
-                <div className="hover:cursor-pointer">×</div>
+                <div onClick={handleTagDelete} className="hover:cursor-pointer">
+                  ×
+                </div>
               </div>
             ))}
           </div>
