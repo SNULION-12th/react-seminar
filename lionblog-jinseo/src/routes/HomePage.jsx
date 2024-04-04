@@ -2,6 +2,7 @@ import { SmallPost } from "../components/Posts";
 import posts from "../data/posts";
 import { Link } from "react-router-dom";
 
+
 const HomePage = () => {
   const postList = posts;
 
@@ -26,6 +27,7 @@ const HomePage = () => {
           <SmallPost key={post.id} post={post} />
         ))}
       </div>
+
       <div className="flex justify-center m-20 button">
         <Link className="button" to="/create">
           작성
