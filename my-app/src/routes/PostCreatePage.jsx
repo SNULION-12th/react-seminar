@@ -1,6 +1,6 @@
 const PostCreatePage = () => {
   const handlePostSubmit = () => {
-    alert("게시글을 등록합니다."); // TODO: add api call for sign up
+    alert("게시글을 등록합니다.");
   };
   return (
     <div className="flex flex-col items-center w-1/2">
@@ -9,7 +9,7 @@ const PostCreatePage = () => {
         <label required htmlFor="title" className="label">
           제목:
         </label>
-        <input
+        <textarea
           required
           type="text"
           id="title"
@@ -31,11 +31,7 @@ const PostCreatePage = () => {
           태그:
         </label>
         <div className="flex w-full">
-          <input
-            id="tag"
-            className="input"
-            placeholder="태그를 추가해주세요."
-          />
+          <input id="tag" className="input" placeholder="태그를 추가하세요." />
           <button className="w-12">추가</button>
         </div>
 

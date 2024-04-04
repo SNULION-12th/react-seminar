@@ -12,7 +12,7 @@ const PostDetailPage = () => {
     const post = posts.find((post) => post.id === parseInt(postId));
     setPost(post);
   }, [postId]);
-  console.log(post);
+
   return (
     <>
       <BigPost post={post} />
