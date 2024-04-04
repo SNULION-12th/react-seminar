@@ -4,6 +4,7 @@ import SignUpPage from "./routes/SignUpPage";
 import Footer from "./components/Footer";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
+import { useParams } from "react-router-dom";
 
 import SignInPage from "./routes/SignInPage";
 import PostCreatePage from "./routes/PostCreatePage";
