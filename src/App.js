@@ -1,6 +1,7 @@
 import logo from "./logo.svg";
 import "./App.css";
 import { useEffect, useState } from "react";
+import Counter from "./components/Counter";
 
 /**
  * React can be seen as HTML + JS + CSS(Optional) in one package
@@ -31,26 +32,95 @@ function App() {
   // Now let us use useState to create the counters
   // You can understand useState as a memory for the browser to store data (once browser refreshes, the data is gone)
 
-  // What to do
-  // 1. Implement 3 counters for Manager, Staff and Guest
-  // 2. Implement a function to calculate whether the market is operatable or not
-  //    The conditions are as follows:
-  //    - (guestCount > staffCount * maxGuestsPerStaff) && (staffCount > managerCount * maxStaffsPerManager)
-  //      => Market is not operatable
-  // 3. Control the counters in the Control Part and show the result in the Result Part
-  let isMoreStaffNeeded = false;
-  let isMoreManagerNeeded = false;
-  let isMarketOpen = true;
+  // useEffect can be used to trigger a function when a variable changes
+  // The second parameter is an array of variables that we want to watch for changes
+  useEffect(() => {
+    console.log(`Guest count has changed to ${guestCount}!`);
+  }, [guestCount]);
 
+  // Real use case of useEffect (check if we need more staff)
+  useEffect(() => {
+    // Check if we need more staff
+    if (guestCount > staffCount * maxGuestsPerStaff) {
+      setIsMoreStaffNeeded(true);
+    } else {
+      setIsMoreStaffNeeded(false);
+    }
+  }, [guestCount, staffCount]);
+
+  // Real use case of useEffect (check if we need more managers)
+  useEffect(() => {
+    // Check if we need more managers
+    if (staffCount > managerCount * maxStaffsPerManager) {
+      setIsMoreManagerNeeded(true);
+    } else {
+      setIsMoreManagerNeeded(false);
+    }
+  }, [staffCount, managerCount]);
+
+  useEffect(() => {
+    // Let the market close if we need more staff and managers
+    if (isMoreStaffNeeded || isMoreManagerNeeded) {
+      setIsMarketOpen(false);
+    } else {
+      setIsMarketOpen(true);
+    }
+  }, [isMoreManagerNeeded, isMoreStaffNeeded]);
+
+  const incrementGuestCount = () => {
+    setGuestCount(guestCount + 1);
+  };
+
+  const decrementGuestCount = () => {
+    setGuestCount(guestCount - 1);
+  };
+
+  const incrementManagerCount = () => {
+    setManagerCount(managerCount + 1);
+  };
+
+  const decrementManagerCount = () => {
+    setManagerCount(managerCount - 1);
+  };
+
+  const incrementStaffCount = () => {
+    setStaffCount(staffCount + 1);
+  };
+
+  const decrementStaffCount = () => {
+    setStaffCount(staffCount - 1);
+  };
+
+  // You can see that we are using components that are pretty similar
+  // We can create a component that can be reused for all of them
   return (
     <div className="App">
       <div className="Control">
+        {/* Counter Example Component */}
+        <Counter />
+        {/* Manager Component */}
         <div>
           {/* Example div for one manager counter. You must fill in {} and () => {} */}
           <h2>Managers: {}</h2>
           <div>
-            <button onClick={() => {}}>Increment</button>
-            <button onClick={() => {}}>Decrement</button>
+            <button onClick={incrementManagerCount}>New Manager</button>
+            <button onClick={decrementManagerCount}>Manager Resign</button>
+          </div>
+        </div>
+        {/* Staff Component */}
+        <div>
+          <h2>Staffs: {staffCount}</h2>
+          <div>
+            <button onClick={incrementStaffCount}>New Staff</button>
+            <button onClick={decrementStaffCount}>Staff Resign</button>
+          </div>
+        </div>
+        {/* Guest Component */}
+        <div>
+          <h2>Guests: {guestCount}</h2>
+          <div>
+            <button onClick={incrementGuestCount}>New Guest</button>
+            <button onClick={decrementGuestCount}>Guest Exit</button>
           </div>
         </div>
         {/* Implement other counters: Staffs, Guests */}
