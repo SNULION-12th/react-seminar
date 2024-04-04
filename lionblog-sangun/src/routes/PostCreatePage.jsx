@@ -1,6 +1,6 @@
 const PostCreatePage = () => {
   const handleCreateSubmit = () => {
-    alert("게시글을 등록합니다"); // TODO: add api call for sign in
+    alert("게시글을 등록합니다."); // TODO: add api call for sign in
   };
   return (
     <div className="flex flex-col items-center w-1/2">
@@ -33,7 +33,7 @@ const PostCreatePage = () => {
         </label>
         <div className="flex w-full">
           <input id="tag" className="input" placeholder="태그를 추가하세요" />
-          <button className="w-20">add</button>
+          <button className="w-20">추가</button>
         </div>
 
         <div className="flex flex-row items-center gap-5">

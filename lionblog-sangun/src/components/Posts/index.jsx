@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 const handleLikeButtonClick = () => {
-  alert("좋아요 버튼을 클릭했습니다!");
+  alert("좋아요");
   // TODO: 실제 삭제 동작 수행
 };
 

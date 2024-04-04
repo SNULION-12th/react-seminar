@@ -14,7 +14,7 @@ const PostDetailPage = () => {
   }, [postId]);
 
   const handleDeleteButtonClick = () => {
-    alert("삭제 버튼을 클릭했습니다!");
+    alert("삭제");
     // TODO: 실제 삭제 동작 수행
   };
 
