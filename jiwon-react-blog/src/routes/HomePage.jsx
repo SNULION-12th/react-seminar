@@ -1,5 +1,6 @@
 import { SmallPost } from "../components/Posts"; //컴포넌트나 훅 불러올때는 중괄호 사용
 import posts from "../data/posts";
+import { Link } from "react-router-dom";
 
 const HomePage = () => {
   const postList = posts;
@@ -24,7 +25,9 @@ const HomePage = () => {
           <SmallPost key={post.id} post={post} /> //배열 렌더링이므로 키 사용
         ))}
       </div>
-      <div className="flex justify-center m-20">작성</div>
+      <Link to="/create" className="flex justify-center m-20">
+        작성
+      </Link>
     </div>
   );
 };
