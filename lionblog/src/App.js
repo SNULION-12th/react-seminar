@@ -21,7 +21,7 @@ function App() {
         <Route path="/signin" element={<SignInPage />} />
         <Route path="/create" element={<PostCreatePage />} />
         <Route path="/post-detail" element={<PostDetailPage />} />
-        <Route path="/post-detail/:postId/edit" element={<PostEditPage />} />
+        <Route path="/post-edit" element={<PostEditPage />} />
       </Routes>
       </PostProvider>
       <Footer />
