@@ -34,7 +34,7 @@ const posts = [
       { id: 5, content: "회장님" },
       { id: 6, content: "연예인" },
     ],
-    like_users: [],
+    like_users: [0, 1, 2, 3, 4, 5],
     created_at: "2024-02-04T07:42:50.658501Z",
   },
   {
