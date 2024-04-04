@@ -8,19 +8,22 @@ import PostCreatePage from "./routes/PostCreatePage";
 import PostDetailPage from "./routes/PostDetailPage";
 import PostEditPage from "./routes/PostEditPage";
 import "./App.css";
+import { PostProvider } from "./routes/postContext";
 
 function App() {
   return (
     <BrowserRouter>
       <Header />
+      <PostProvider>
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/signin" element={<SignInPage />} />
         <Route path="/create" element={<PostCreatePage />} />
-        <Route path="/:postId" element={<PostDetailPage />} />
-        <Route path="/:postId/edit" element={<PostEditPage />} />
+        <Route path="/post-detail" element={<PostDetailPage />} />
+        <Route path="/post-detail/:postId/edit" element={<PostEditPage />} />
       </Routes>
+      </PostProvider>
       <Footer />
     </BrowserRouter>
   );

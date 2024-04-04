@@ -1,9 +1,16 @@
 import { SmallPost } from "../components/posts";
 import posts from "../data/posts";
 import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { usePostContext } from "../routes/postContext";
 
 const HomePage = () => {
   const postList = posts;
+  const { setSelectedPost } = usePostContext();
+
+  const handlePostClick = (post) => {
+    setSelectedPost(post);
+  };
 
   const handleChange = (e) => {};
 
@@ -22,7 +29,11 @@ const HomePage = () => {
       </div>
       <div className="justify-center grid grid-cols-4">
         {postList.map((post) => (
-          <SmallPost key={post.id} post={post} />
+          <div key={post.id} onClick={() => handlePostClick(post)}>
+            <Link to="/post-detail">
+              <SmallPost post={post} />
+            </Link>
+          </div>
         ))}
       </div>
       <div className="flex justify-center m-20">

@@ -1,23 +1,15 @@
 import { BigPost } from "../components/posts";
+import posts from "../data/posts";
+import { usePostContext } from "../routes/postContext";
 
 const PostDetailPage = () => {
-  function getPostHandler(id) {
-    try{
-      fetch(`/api/post/${id}/`, {
-        method: 'GET',
-        headers: {
-        'Authorization' : "Custom Token"
-        }
-      })
-      .then((response) => response.json())
-    } catch (e) {
-      console.log("아직 API가 세팅되지 않았습니다!" + e);
-    }
-  }
+  const { selectedPost } = usePostContext(); // Get selectedPost from context
 
   return (
-    <BigPost ></BigPost>
-  )
+    <div>
+      {selectedPost && <BigPost post={selectedPost} />} {}
+    </div>
+  );
 };
 
 export default PostDetailPage;
