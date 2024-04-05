@@ -16,11 +16,6 @@ const PostCreatePage = () => {
     //TODO : api connect(create post)
   };
 
-  const onAddTag = (e) => {
-    alert("태그를 추가합니다.");
-    //TODO : add tag to post
-  };
-
   return (
     <div className="flex flex-col items-center w-3/5">
       <h3 className="font-bold text-4xl">게시글 작성</h3>
@@ -59,7 +54,9 @@ const PostCreatePage = () => {
               id="tags"
               className="input grow"
             />
-            <button type="button" className="small-button w-16" onClick={onAddTag}>추가</button>
+            <button type="button" className="small-button w-16">
+              추가
+            </button>
           </div>
         </div>
         {post.tags && (
