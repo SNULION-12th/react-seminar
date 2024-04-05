@@ -18,6 +18,16 @@ const PostEditPage = () => {
     // TODO : api connect(edit post)
   };
 
+  const onAddTag = (e) => {
+    alert("태그를 추가합니다.");
+    // TODO : add tag to post
+  };
+
+  const onDeleteTag = (e) => {
+    alert("태그를 삭제합니다.");
+    // TODO : delete tag from post
+  };
+
   return (
     <div className="flex flex-col items-center w-3/5">
       <h3 className="font-bold text-4xl">게시글 수정</h3>
@@ -56,7 +66,7 @@ const PostEditPage = () => {
               id="tags"
               className="input grow"
             />
-            <button className="small-button w-16">add</button>
+            <button type="button" className="small-button w-16" onClick={onAddTag}>add</button>
           </div>
         </div>
         {post.tags && (
@@ -66,7 +76,7 @@ const PostEditPage = () => {
                 <span className="tag active m-1 flex flex-row items-center gap-x-2">
                   <p>#{tag}</p>
                 </span>
-                <button className="after:content-['\00d7'] text-xl" />
+                <button type="button" className="after:content-['\00d7'] text-xl" onClick={onDeleteTag} />
               </div>
             ))}
           </div>

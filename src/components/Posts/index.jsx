@@ -23,6 +23,10 @@ export const SmallPost = ({ post }) => {
 };
 
 export const BigPost = ({ post }) => {
+  const onPressLike = () => {
+    alert("좋아요");
+  };
+
   return (
     <div className="flex flex-col px-8 py-5 w-full bg-orange-400 ring-4 ring-orange-300 rounded-xl gap-5">
       <div className="flex flex-row items-center justify-between gap-3">
@@ -34,7 +38,7 @@ export const BigPost = ({ post }) => {
         </span>
       </div>
 
-      <div className=" rounded-xl p-2 text-black font-medium text-lg border-2 border-black">
+      <div className="rounded-xl p-2 text-black font-medium text-lg border-2 border-black">
         {post.content}
       </div>
 
@@ -47,9 +51,9 @@ export const BigPost = ({ post }) => {
           ))}
       </div>
 
-      <div className="flex flex-row text-black cursor-pointer">
+      <span className="flex flex-row text-black cursor-pointer" onClick={onPressLike}>
         ❤️ {post.like_users.length > 0 ? post.like_users.length : "0"}
-      </div>
+      </span>
     </div>
   );
 };
