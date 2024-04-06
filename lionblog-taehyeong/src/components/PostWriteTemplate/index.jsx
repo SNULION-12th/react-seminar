@@ -1,14 +1,50 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { DarkModeContext, PostsDataContext } from "../../App";
 
 export const PostWriteTemplate = ({ initial, mode }) => {
   const navigate = useNavigate();
   const [post, setPost] = useState(initial);
+
+  const [tags, setTags] = useState([]);
+  const [tagInputValue, setTagInputValue] = useState("");
+  const [autoCompletes, setAutoCompletes] = useState([]);
+
+  const handleTag = (e) => {
+    setTagInputValue(e.target.value);
+    if (e.target.value) {
+      const autoCompleteData = tags.filter((tag) =>
+        tag.includes(e.target.value)
+      );
+      setAutoCompletes(autoCompleteData);
+    } else {
+      setAutoCompletes([]);
+    }
+  };
+
+  const handleAutoCompletes = (autoComplete) => {
+    const selectedTag = tags.find((tag) => tag === autoComplete);
+    const postTagContents = post.tags.map((tag) => tag.content);
+
+    if (postTagContents.includes(selectedTag)) return; // 입력한 내용이 이미 등록된 태그면 그냥 등록 안됨
+
+    const data = { ...post };
+    const validTags = data.tags.filter((tag) => !!tag);
+    const tagSorted = validTags.sort((a, b) => a.id - b.id);
+
+    data.tags.push({
+      id: tagSorted.length === 0 ? 1 : tagSorted[tagSorted.length - 1].id + 1,
+      content: selectedTag,
+    });
+    setPost(data);
+    setTagInputValue("");
+    setAutoCompletes([]);
+  };
+
   const darkMode = useContext(DarkModeContext);
   const posts = useContext(PostsDataContext);
 
-  const updateTempTag = (e) => setPost({ ...post, temp_tag: e.target.value });
+  // const updateTempTag = (e) => setPost({ ...post, temp_tag: e.target.value });
   const updateTags = () => {
     const data = { ...post };
     const validTags = data.tags.filter((tag) => !!tag);
@@ -31,6 +67,8 @@ export const PostWriteTemplate = ({ initial, mode }) => {
     //   if (tag && tag.id === tagId) array[index] = null;
     // });
   };
+
+  // tag autoComplete
 
   const onSumbitMethod = (mode) => {
     if (mode === "작성") {
@@ -55,6 +93,21 @@ export const PostWriteTemplate = ({ initial, mode }) => {
     }
     navigate("/");
   };
+
+  useEffect(() => {
+    const duplicatedTagList = posts.reduce((acc, post) => {
+      if (post) for (let tag of post.tags) acc.add(tag.content);
+
+      return acc;
+    }, new Set());
+    const tagList = [...duplicatedTagList];
+    setTags([...tagList]);
+    console.log("tagList", tagList);
+  }, []);
+
+  useEffect(() => {
+    console.log(post);
+  }, [post]);
 
   return (
     <main className="main-container">
@@ -99,12 +152,24 @@ export const PostWriteTemplate = ({ initial, mode }) => {
             type="text"
             className="input grow"
             placeholder="태그를 추가하세요."
-            onChange={updateTempTag}
-            value={post.temp_tag}
+            onChange={handleTag}
+            value={tagInputValue}
           />
           <button type="button" className="w-20" onClick={updateTags}>
             추가
           </button>
+        </div>
+        <div className="flex mt-2 bg-black border-gray-500 rounded-2xl w-full">
+          {autoCompletes &&
+            autoCompletes.map((autoComplete) => (
+              <button
+                className="tag rounded-2xl text-start border-gray-500 py-2 px-3 text-white focus:bg-gray"
+                key={autoComplete}
+                onClick={() => handleAutoCompletes(autoComplete)}
+              >
+                #{autoComplete}
+              </button>
+            ))}
         </div>
         {post.tags.length > 0 && (
           <div className="flex flex-row w-full">
