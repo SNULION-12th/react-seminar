@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import posts from "../data/posts";
 import { BigPost } from "../components/Posts";
+import Comment from "../components/Comment";
+import posts from "../data/posts";
 
 const PostEditPage = () => {
   const { postId } = useParams();
