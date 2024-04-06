@@ -22,7 +22,9 @@ const HomePage = () => {
       </div>
       <div className="grid grid-cols-4 px-10 mt-10">
         {postList.map((post) => (
-          <SmallPost key={post.id} post={post} />
+          <Link key={post.id} to={`/post/${post.id}`}>
+            <SmallPost post={post} />
+          </Link>
         ))}
       </div>
       <div className="flex justify-center m-20 button">

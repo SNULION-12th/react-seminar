@@ -19,7 +19,7 @@ function App() {
           <Route path="/signup" element={<SignUpPage />} />
           <Route path="/signin" element={<SignInPage />} />
           <Route path="/create" element={<PostCreatePage />} />
-          <Route path="/:postId" element={<PostDetailPage />} />
+          <Route path="post/:postId" element={<PostDetailPage />} />
           <Route path="/:postId/edit" element={<PostEditPage />} />
         </Routes>
       </BrowserRouter>
