@@ -1,6 +1,11 @@
 import { Link } from "react-router-dom";
 
 export const SmallPost = ({ post }) => {
+  const onClickLike = (e) => {
+    e.preventDefault();
+    alert("나도 좋아!");
+    // add api call for liking post here
+  };
   return (
     <Link
       to={`/${post.id}`}
@@ -15,14 +20,18 @@ export const SmallPost = ({ post }) => {
           </span>
         ))}
       </div>
-      <span className="cursor-pointer">
+      <div onClick={onClickLike} className="cursor-pointer">
         {post.like_users.length > 0 && `❤️ ${post.like_users.length}`}
-      </span>
+      </div>
     </Link>
   );
 };
 
 export const BigPost = ({ post }) => {
+  const onClickLike = () => {
+    alert("나도 좋아!");
+    // add api call for liking post here
+  };
   return (
     <div className="flex flex-col px-8 py-5 w-full bg-orange-400 ring-4 ring-orange-300 rounded-xl gap-5">
       <div className="flex flex-row items-center justify-between gap-3">
@@ -33,9 +42,11 @@ export const BigPost = ({ post }) => {
           {post.created_at.slice(0, 10)}
         </span>
       </div>
-      <div className="rounded-xl p-2 text-black font-medium text-lg border-2 border-black">
+
+      <div className=" rounded-xl p-2 text-black font-medium text-lg border-2 border-black">
         {post.content}
       </div>
+
       <div className="flex flex-row gap-2">
         {post.tags &&
           post.tags.map((tag) => (
@@ -44,9 +55,9 @@ export const BigPost = ({ post }) => {
             </span>
           ))}
       </div>
-      <span className="flex flex-row text-black cursor-pointer">
+      <div onClick={onClickLike} className="flex flex-row text-black cursor-pointer">
         ❤️ {post.like_users.length > 0 ? post.like_users.length : "0"}
-      </span>
+      </div>
     </div>
   );
 };
