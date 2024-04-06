@@ -31,7 +31,6 @@ const SignUpPage = () => {
           id="confirm_password"
           className="input"
         />
-
         <label htmlFor="college" className="label">
           {" "}
           {/* required가 아닌 경우에는 빈 값이라도 넣어서 보내주기 */}
