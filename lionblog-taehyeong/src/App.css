@@ -10,4 +10,10 @@
   margin: 0;
   align-items: center;
   height: 100%;
+  min-height: 100vh;
+  transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
 }
+
+/* .header {
+  transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
+} */

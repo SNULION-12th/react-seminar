@@ -1,9 +1,12 @@
+import { useContext } from "react";
 import { SmallPost } from "../components/Posts";
-import posts from "../data/posts";
+// import posts from "../data/posts";
 import { Link } from "react-router-dom";
+import { PostsDataContext } from "../App";
 
 const HomePage = () => {
-  const postList = posts;
+  // const postList = posts;
+  const postList = useContext(PostsDataContext);
 
   const handleChange = (e) => {};
 
@@ -11,7 +14,7 @@ const HomePage = () => {
     <div>
       <div className="flex flex-col justify-center items-center mb-5">
         <div className="w-full mb-16 flex justify-center">
-          <h1 className="uppercase text-6xl text-white">my blog</h1>
+          <h1 className="uppercase text-6xl">my blog</h1>
         </div>
         <input
           type="text"
@@ -21,9 +24,9 @@ const HomePage = () => {
         />
       </div>
       <div className="grid grid-cols-4 px-10 mt-10">
-        {postList.map((post) => (
-          <SmallPost key={post.id} post={post} />
-        ))}
+        {postList.map((post) =>
+          post ? <SmallPost key={post.id} post={post} /> : null
+        )}
       </div>
       <div className="flex justify-center m-20">
         <Link className="button" to="/create">
