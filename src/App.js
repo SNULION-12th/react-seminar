@@ -1,6 +1,6 @@
-import logo from "./logo.svg";
 import "./App.css";
 import { useEffect, useState } from "react";
+import Counter from "./component/Counter";
 
 /**
  * React can be seen as HTML + JS + CSS(Optional) in one package
@@ -38,22 +38,76 @@ function App() {
   //    - (guestCount > staffCount * maxGuestsPerStaff) && (staffCount > managerCount * maxStaffsPerManager)
   //      => Market is not operatable
   // 3. Control the counters in the Control Part and show the result in the Result Part
-  let isMoreStaffNeeded = false;
-  let isMoreManagerNeeded = false;
-  let isMarketOpen = true;
 
+  const [guestCount, setGuestCount] = useState(0);
+  const [managerCount, setmangerCount] = useState(1);
+  const [staffCount, setStaffCount] = useState(1);
+  const [isMoreStaffNeeded, setisMoreStaffNeeded] = useState(false);
+  const [isMoreManagerNeeded, setisMoreManagerNeeded] = useState(false);
+  const [isMarketOpen, setisMarketOpen] = useState(true);
+
+  useEffect(() => {
+    if (guestCount > staffCount * maxGuestsPerStaff) {
+      console.log("More staff needed");
+      setisMoreStaffNeeded(true);
+    } else {
+      console.log("No need for more staff");
+      setisMoreStaffNeeded(false);
+    }
+  }, [guestCount, staffCount]);
+
+  useEffect(() => {
+    if (staffCount > managerCount * maxStaffsPerManager) {
+      console.log("More manager needed");
+      setisMoreManagerNeeded(true);
+    } else {
+      console.log("No need for more manager");
+      setisMoreManagerNeeded(false);
+    }
+  }, [staffCount, managerCount]);
+
+  useEffect(() => {
+    if (isMoreManagerNeeded || isMoreStaffNeeded) {
+      console.log("Market is closed");
+      setisMarketOpen(false);
+    } else {
+      console.log("Market is open");
+      setisMarketOpen(true);
+    }
+  }, [isMoreManagerNeeded, isMoreStaffNeeded]);
   return (
     <div className="App">
       <div className="Control">
-        <div>
-          {/* Example div for one manager counter. You must fill in {} and () => {} */}
-          <h2>Managers: {}</h2>
-          <div>
-            <button onClick={() => {}}>Increment</button>
-            <button onClick={() => {}}>Decrement</button>
-          </div>
-        </div>
-        {/* Implement other counters: Staffs, Guests */}
+        <Counter
+          name={"Managers"}
+          count={managerCount}
+          inCreonClick={() => {
+            setmangerCount(managerCount + 1);
+          }}
+          deCreonClick={() => {
+            setmangerCount(managerCount - 1);
+          }}
+        />
+        <Counter
+          name={"Staffs"}
+          count={staffCount}
+          inCreonClick={() => {
+            setStaffCount(staffCount + 1);
+          }}
+          deCreonClick={() => {
+            setStaffCount(staffCount - 1);
+          }}
+        />
+        <Counter
+          name={"Guests"}
+          count={guestCount}
+          inCreonClick={() => {
+            setGuestCount(guestCount + 1);
+          }}
+          deCreonClick={() => {
+            setGuestCount(guestCount - 1);
+          }}
+        />
       </div>
       <div className="Result">
         <h2>
