@@ -21,7 +21,11 @@ const HomePage = () => {
       </div>
       <div className="grid grid-cols-4 px-10 mt-10">
         {postList.map((post) => (
-          <SmallPost key={post.id} post={post} />
+          <Link to={`/${post.id}`} state={{ postId: post.id }}>
+            <SmallPost post={post} />
+          </Link>
+          //Link 컴포넌트를 사용할 때, to 속성의 값은 중괄호 {}로 감싸야 하며, 문자열 안에서 변수를 사용하려면 백틱(``)을 사용해야 한다.
+          // 또한, 동적 경로를 지정할 때 /:postId 대신 실제 post.id 값을 사용해야 해요.
         ))}
       </div>
       <div className="flex justify-center m-20">
