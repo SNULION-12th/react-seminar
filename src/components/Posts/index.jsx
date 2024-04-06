@@ -1,4 +1,9 @@
 import { Link } from "react-router-dom";
+const onClickLike = (e) => {
+  e.preventDefault();
+  alert("나도 좋아!");
+  // add api call for liking post here
+};
 
 export const SmallPost = ({ post }) => {
   return (
@@ -15,7 +20,7 @@ export const SmallPost = ({ post }) => {
           </span>
         ))}
       </div>
-      <span className="cursor-pointer">
+      <span className="cursor-pointer" onClick={onClickLike}>
         {post.like_users.length > 0 && `❤️ ${post.like_users.length}`}
       </span>
     </Link>
@@ -44,7 +49,10 @@ export const BigPost = ({ post }) => {
             </span>
           ))}
       </div>
-      <span className="flex flex-row text-black cursor-pointer">
+      <span
+        className="flex flex-row text-black cursor-pointer"
+        onClick={onClickLike}
+      >
         ❤️ {post.like_users.length > 0 ? post.like_users.length : "0"}
       </span>
     </div>
