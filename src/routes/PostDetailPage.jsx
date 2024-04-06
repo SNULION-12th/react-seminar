@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { BigPost } from "../components/Posts";
 import posts from "../data/posts";
 
@@ -11,9 +11,11 @@ const PostDetailPage = () => {
     setPost(post);
   }, [postId]);
 
+  const navigate = useNavigate(); //useNavigate 훅으로 홈화면으로 보내버리기
   const onClickDelete = () => {
-    alert("삭제");
-    //TODO : api connect(delete post)
+    alert("게시물을 삭제합니다.");
+    navigate("/");
+    // add api call for deleting post
   };
 
   return (
