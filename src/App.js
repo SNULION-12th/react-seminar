@@ -28,9 +28,6 @@ function App() {
   // You can see that console log is called everytime we refresh the page (You can see the log in the browser console (F12))
   console.log("App is rendered");
 
-  // You can see that console log is called everytime we refresh the page (You can see the log in the browser console (F12))
-  console.log("App is rendered");
-
   // You may use let variable inside a react functional component
   // But an update to a let variable will not trigger a re-render
   // Our counters
@@ -38,40 +35,35 @@ function App() {
   const [managerCount, setManagerCount] = useState(1);
   const [staffCount, setStaffCount] = useState(1);
 
-  // First try to console log the guestCount only when it is updated
-  // Uncomment the below code and see the console log
-  // useEffect(() => {
-  //   console.log(`Guest count has changed to ${guestCount}!`);
-  // }, [guestCount]);
+  const [isMoreStaffNeeded, setIsMoreStaffNeeded] = useState(false);
+  const [isMoreManagerNeeded, setIsMoreManagerNeeded] = useState(false);
+  const [isMarketOpen, setIsMarketOpen] = useState(true);
 
-  // Change the below code by using useEffect
-  let isMoreStaffNeeded = false;
-  if (guestCount > staffCount * maxGuestsPerStaff) {
-    console.log("More staff needed");
-    isMoreStaffNeeded = true;
-  } else {
-    console.log("No need for more staff");
-    isMoreStaffNeeded = false;
-  }
+  useEffect(() => {
+    // Check if we need more staff
+    if (guestCount > staffCount * maxGuestsPerStaff) {
+      setIsMoreStaffNeeded(true);
+    } else {
+      setIsMoreStaffNeeded(false);
+    }
+  }, [guestCount, staffCount]);
 
-  let isMoreManagerNeeded = false;
-  if (staffCount > managerCount * maxStaffsPerManager) {
-    console.log("More manager needed");
-    isMoreManagerNeeded = true;
-  } else {
-    console.log("No need for more manager");
-    isMoreManagerNeeded = false;
-  }
+  useEffect(() => {
+    if (staffCount > managerCount * maxStaffsPerManager) {
+      setIsMoreManagerNeeded(true);
+    } else {
+      setIsMoreManagerNeeded(false);
+    }
+  }, [staffCount, managerCount]);
 
-  let isMarketOpen = true;
-  if (isMoreManagerNeeded || isMoreStaffNeeded) {
-    console.log("Market is closed");
-    isMarketOpen = false;
-  } else {
-    console.log("Market is open");
-    isMarketOpen = true;
-  }
-
+  useEffect(() => {
+    if (isMoreStaffNeeded || isMoreManagerNeeded) {
+      setIsMarketOpen(false);
+    } else {
+      setIsMarketOpen(true);
+    }
+  }, [isMoreManagerNeeded, isMoreStaffNeeded]);
+  
   const incrementGuestCount = () => {
     setGuestCount(guestCount + 1);
   };
