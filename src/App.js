@@ -29,16 +29,17 @@ function App() {
   // You can see that console log is called everytime we refresh the page (You can see the log in the browser console (F12))
   console.log("App is rendered");
 
-  // Now let us use useState to create the counters
-  // You can understand useState as a memory for the browser to store data (once browser refreshes, the data is gone)
+  // You may use let variable inside a react functional component
+  // But an update to a let variable will not trigger a re-render
+  // Our counters
+  const [guestCount, setGuestCount] = useState(0);
+  const [managerCount, setManagerCount] = useState(1);
+  const [staffCount, setStaffCount] = useState(1);
 
-  // useEffect can be used to trigger a function when a variable changes
-  // The second parameter is an array of variables that we want to watch for changes
-  useEffect(() => {
-    console.log(`Guest count has changed to ${guestCount}!`);
-  }, [guestCount]);
+  const [isMoreStaffNeeded, setIsMoreStaffNeeded] = useState(false);
+  const [isMoreManagerNeeded, setIsMoreManagerNeeded] = useState(false);
+  const [isMarketOpen, setIsMarketOpen] = useState(true);
 
-  // Real use case of useEffect (check if we need more staff)
   useEffect(() => {
     // Check if we need more staff
     if (guestCount > staffCount * maxGuestsPerStaff) {
@@ -48,9 +49,7 @@ function App() {
     }
   }, [guestCount, staffCount]);
 
-  // Real use case of useEffect (check if we need more managers)
   useEffect(() => {
-    // Check if we need more managers
     if (staffCount > managerCount * maxStaffsPerManager) {
       setIsMoreManagerNeeded(true);
     } else {
@@ -59,7 +58,6 @@ function App() {
   }, [staffCount, managerCount]);
 
   useEffect(() => {
-    // Let the market close if we need more staff and managers
     if (isMoreStaffNeeded || isMoreManagerNeeded) {
       setIsMarketOpen(false);
     } else {
@@ -91,43 +89,36 @@ function App() {
     setStaffCount(staffCount - 1);
   };
 
-  // You can see that we are using components that are pretty similar
-  // We can create a component that can be reused for all of them
   return (
     <div className="App">
       <div className="Control">
-        {/* Counter Example Component */}
-        <Counter />
         {/* Manager Component */}
         <div>
-          {/* Example div for one manager counter. You must fill in {} and () => {} */}
-          <h2>Managers: {}</h2>
+          <h2>Managers: {managerCount}</h2>
           <div>
-            <button onClick={incrementManagerCount}>New Manager</button>
-            <button onClick={decrementManagerCount}>Manager Resign</button>
+            <button onClick={incrementManagerCount}>Increment</button>
+            <button onClick={decrementManagerCount}>Decrement</button>
           </div>
         </div>
         {/* Staff Component */}
         <div>
           <h2>Staffs: {staffCount}</h2>
           <div>
-            <button onClick={incrementStaffCount}>New Staff</button>
-            <button onClick={decrementStaffCount}>Staff Resign</button>
+            <button onClick={incrementStaffCount}>Increment</button>
+            <button onClick={decrementStaffCount}>Decrement</button>
           </div>
         </div>
         {/* Guest Component */}
         <div>
           <h2>Guests: {guestCount}</h2>
           <div>
-            <button onClick={incrementGuestCount}>New Guest</button>
-            <button onClick={decrementGuestCount}>Guest Exit</button>
+            <button onClick={incrementGuestCount}>Increment</button>
+            <button onClick={decrementGuestCount}>Decrement</button>
           </div>
         </div>
-        {/* Implement other counters: Staffs, Guests */}
       </div>
       <div className="Result">
         <h2>
-          {/* You can use ternary operator to dynamically render div content */}
           Market Status: <span>{isMarketOpen ? "OPEN" : "CLOSED"}</span>
         </h2>
         <h4>{isMoreStaffNeeded ? "Not enough staff" : ""}</h4>
