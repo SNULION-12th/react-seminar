@@ -1,53 +1,57 @@
-const SignUpPage = () => {
-  const handleSignUpSubmit = () => {
-    alert("회원가입 하기"); // TODO: add api call for sign up
+import { useState } from "react";
+
+const SignInPage = () => {
+  const [signInData, setSignInData] = useState({
+    username: "",
+    password: "",
+  });
+
+  const handleSignInData = (e) => {
+    const { id, value } = e.target; // 비구조화	할당 id, value는 사실 e.target.id, e.target.value
+    console.log(e.target);
+    setSignInData({ ...signInData, [id]: value });
+  };
+
+  const handleSignInSubmit = (e) => {
+    e.preventDefault(); // to prevent reloading the page
+    console.log(signInData);
+    alert("로그인하기");
   };
 
   return (
     <div className="flex flex-col items-center w-1/2">
-      <h3 className="font-bold text-2xl">회원가입</h3>
-      <form className="form gap-2" onSubmit={handleSignUpSubmit}>
-        <label htmlFor="email" className="label">
-          *이메일:
-        </label>
-        <input required type="email" id="email" className="input" />
-
-        <label required htmlFor="username" className="label">
+      <h3 className=" font-bold text-2xl">로그인</h3>
+      <form className="form gap-2" onSubmit={handleSignInSubmit}>
+        <label htmlFor="username" className="label">
           *유저 이름:
         </label>
-        <input required type="text" id="username" className="input" />
+        <input
+          required
+          type="text"
+          id="username"
+          className="input"
+          value={signInData.username}
+          onChange={handleSignInData}
+        />
 
         <label htmlFor="password" className="label">
           *비밀번호:
         </label>
-        <input required type="password" id="password" className="input" />
-
-        <label htmlFor="confirm_password" className="label">
-          *비밀번호 확인:
-        </label>
         <input
           required
           type="password"
-          id="confirm_password"
+          id="password"
           className="input"
+          value={signInData.password}
+          onChange={handleSignInData}
         />
-
-        <label htmlFor="college" className="label">
-          대학:{" "}
-        </label>
-        <input type="text" id="college" className="input" />
-
-        <label htmlFor="major" className="label">
-          전공:{" "}
-        </label>
-        <input type="text" id="major" className="input" />
 
         <div className="flex flex-row items-center gap-5">
           <button type="reset" className="button mt-7">
             초기화
           </button>
           <button type="submit" className="button mt-7">
-            회원가입
+            로그인
           </button>
         </div>
       </form>
@@ -55,4 +59,4 @@ const SignUpPage = () => {
   );
 };
 
-export default SignUpPage;
+export default SignInPage;
