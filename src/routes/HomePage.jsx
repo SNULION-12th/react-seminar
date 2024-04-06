@@ -5,7 +5,6 @@ import posts from "../data/posts";
 
 const HomePage = () => {
   const [postList, setPostList] = useState(posts);
-
   const [tags, setTags] = useState([]);
   const [searchTags, setSearchTags] = useState([]);
   const [searchValue, setSearchValue] = useState("");
