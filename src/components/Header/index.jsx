@@ -1,8 +1,18 @@
 import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 import lion from "../../assets/images/lion.jpeg";
 
 const Header = () => {
+  const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
+  useEffect(() => {
+    // TODO: 이후 api 연결 시 유효한 token이 있다면 setIsUserLoggedIn(true)로 상태 변경하는 코드 작성
+  }, []);
+
+  const handleSignOut = () => {
+    // TODO: 이후 api 연결 시 token 제거
+  };
+
   return (
     <div className="flex items-center justify-between w-full gap-5 bg-black px-5 py-2.5 h-20">
       <Link to="/" className="flex flex-row items-center gap-5">
