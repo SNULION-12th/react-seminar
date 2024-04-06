@@ -10,6 +10,7 @@ const posts = [
       { id: 2, content: "치즈" },
       { id: 3, content: "냠냠" },
     ],
+
     like_users: [1, 2],
     created_at: "2024-02-04T07:42:50.658501Z",
   },
