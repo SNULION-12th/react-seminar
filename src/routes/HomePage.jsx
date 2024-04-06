@@ -9,7 +9,7 @@ const HomePage = () => {
   const [searchTags, setSearchTags] = useState([]);
   const [searchValue, setSearchValue] = useState("");
 
-  useEffect(() => {
+  useEffect(() => { 
     const tagList = posts.reduce((acc, post) => {
       for (let tag of post.tags) {
         acc.add(tag.content);
