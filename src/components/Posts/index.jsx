@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 
 export const SmallPost = ({ post }) => {
-  const onClickLike = () => {
+  const onClickLike = (e) => {
+    e.preventDefault();
     alert("나도 좋아!");
     // add api call for liking post here
   };
