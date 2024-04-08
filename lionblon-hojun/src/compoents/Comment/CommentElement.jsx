@@ -16,6 +16,7 @@ const CommentElement = ({ comment, handleCommentDelete }) => {
 
   const handleEditComment = () => {
     alert("댓글 수정"); // add api call for editing comment
+    setonEdit(!onEdit);
   };
 
   useEffect(() => {
@@ -27,7 +28,18 @@ const CommentElement = ({ comment, handleCommentDelete }) => {
     <div className="w-full flex flex-row justify-between items-center mb-5">
       <div className="w-3/4 flex flex-col gap-1">
         {/* // TODO: 수정 중일 때와 아닐 때를 나눠서 보여줘야 해요! */}
-        {onEdit ? <input /> : <p>{comment.content}</p>}
+        {onEdit ? (
+          <input
+            type="text"
+            className="input"
+            value={commentEditInput}
+            onChange={(e) => {
+              setcommentEditInput(e.target.value);
+            }}
+          />
+        ) : (
+          <p>{comment.content}</p>
+        )}
         {/* // 날짜 */}
         <span className="text-base text-gray-300">
           {year}.{month}.{day}
@@ -36,7 +48,32 @@ const CommentElement = ({ comment, handleCommentDelete }) => {
 
       <div className="flex flex-row items-center gap-3">
         {/* // TODO: 버튼 (수정 중인 경우와 아닌 경우 나타나는 버튼이 달라요!) */}
-        {/* {onEdit ? 취소, 완료 버튼 : 수정, 삭제 버튼} */}
+        {onEdit ? (
+          <div className="pb-6">
+            <button
+              className="mr-2"
+              onClick={() => {
+                setonEdit(!onEdit);
+              }}
+            >
+              취소
+            </button>
+            <button
+              onClick={() => {
+                setonEdit(!onEdit);
+              }}
+            >
+              완료
+            </button>
+          </div>
+        ) : (
+          <div>
+            <button className="mr-2" onClick={handleCommentDelete}>
+              삭제
+            </button>
+            <button onClick={handleEditComment}>수정</button>
+          </div>
+        )}
       </div>
     </div>
   );
