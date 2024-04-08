@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 const CommentElement = ({ comment, handleCommentDelete }) => {
   const [isEditMode, setIsEditMode] = useState(false);
   const [content, setContent] = useState(comment.content);
+  const [editInputValue, setEditInputValue] = useState("");
 
   /* TODO: 댓글을 수정하는 input의 value를 관리하기 위한 state 작성
        Hint: 댓글의 내용을 저장하는 state와 수정 중인지 여부를 저장하는 state를 따로 만드는 게 좋겠죠? */
@@ -17,7 +18,9 @@ const CommentElement = ({ comment, handleCommentDelete }) => {
 
   const handleEditComment = (e) => {
     e.preventDefault();
+    setContent(editInputValue);
     setIsEditMode(false);
+    setEditInputValue("");
   };
 
   const toEditMode = (e) => {
@@ -41,7 +44,7 @@ const CommentElement = ({ comment, handleCommentDelete }) => {
           <input
             className="input"
             defaultValue={content}
-            onChange={(e) => setContent(e.target.value)}
+            onChange={(e) => setEditInputValue(e.target.value)}
           />
         ) : (
           <p>{content}</p>

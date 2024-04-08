@@ -5,7 +5,6 @@ import CommentElement from "./CommentElement";
 const Comment = ({ postId }) => {
   const [commentsData, setCommentsData] = useState([]);
   const [commentInputValue, setCommentInputValue] = useState("");
-  // TODO: 새로운 댓글을 추가하기 위한 state를 만들어주세요
 
   const handleCommentInputChange = (e) => {
     const { value } = e.target;
