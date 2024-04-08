@@ -19,6 +19,7 @@ const PostCreatePage = () => {
 
   const handleChange = (e) => {
     setPost({ ...post, [e.target.id]: e.target.value });
+    console.log(post);
   };
 
   useEffect(() => {
@@ -32,18 +33,18 @@ const PostCreatePage = () => {
     setTags([...tagList]);
   }, []);
 
-	const handleAutoCompletes = (autoComplete) => {
+  const handleAutoCompletes = (autoComplete) => {
     const selectedTag = tags.find((tag) => tag === autoComplete);
-    if (post.tags.includes(selectedTag)) return; // 입력한 내용이 이미 등록된 태그면 그냥 등록 안됨
+    if (post.tags.includes(autoComplete)) return; // 입력한 내용이 이미 등록된 태그면 그냥 등록 안됨
     setPost({
       ...post,
-      tags: [...post.tags, selectedTag],
+      tags: [...post.tags, autoComplete],
     });
     setTagInputValue("");
     setAutoCompletes([]);
   };
-  
-	const handleTag = (e) => {
+
+  const handleTag = (e) => {
     setTagInputValue(e.target.value);
     if (e.target.value) {
       const autoCompleteData = tags.filter((tag) =>
@@ -86,10 +87,11 @@ const PostCreatePage = () => {
     //TODO : api connect(create post)
   };
 
-  return isSubmitted ? (<div className="flex flex-col items-center w-[60%] p-8">
-  <BigPost post={post} />
-</div>
-): (
+  return isSubmitted ? (
+    <div className="flex flex-col items-center w-[60%] p-8">
+      <BigPost post={post} />
+    </div>
+  ) : (
     <div className="flex flex-col items-center w-3/5">
       <h3 className="font-bold text-4xl">게시글 작성</h3>
       <form className="form" onSubmit={onSubmit}>
@@ -131,7 +133,11 @@ const PostCreatePage = () => {
               value={tagInputValue}
               onChange={handleTag}
             />
-            <button type="button" onClick={addTag} className="small-button w-16">
+            <button
+              type="button"
+              onClick={addTag}
+              className="small-button w-16"
+            >
               추가
             </button>
           </div>
@@ -155,7 +161,10 @@ const PostCreatePage = () => {
                 <span className="tag active m-1 flex flex-row items-center gap-x-2">
                   <p>#{tag}</p>
                 </span>
-                <button onClick={() => deleteTag(tag)} className="after:content-['\00d7'] text-xl" />
+                <button
+                  onClick={() => deleteTag(tag)}
+                  className="after:content-['\00d7'] text-xl"
+                />
               </div>
             ))}
           </div>
