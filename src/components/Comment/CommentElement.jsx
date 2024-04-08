@@ -28,7 +28,7 @@ const CommentElement = (props) => {
     // API 명세에 맞춰 console에 찍어보기 연습
     console.log(postId); // Query Parameter
     console.log({
-      content: "댓글 수정!!",
+      content: "댓글 수정!!!",
     }); // Body
     //
     alert("댓글 수정"); // add api call for editing comment
