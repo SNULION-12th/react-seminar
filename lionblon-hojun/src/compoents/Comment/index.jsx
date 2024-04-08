@@ -3,9 +3,7 @@ import comments from "../../data/comments"; // dummy data
 import CommentElement from "./CommentElement";
 
 const Comment = ({ postId }) => {
-  // TODO: comments를 저장하기 위한 state를 만들어주세요
-  const [commentsOdj, setcommentsOdj] = useState(comments);
-  // TODO: 새로운 댓글을 추가하기 위한 state를 만들어주세요
+  const [commentsarr, setcommentsarr] = useState(comments);
   const [commentInput, setcommentInput] = useState("");
   const handleCommentSubmit = (e) => {
     e.preventDefault();
@@ -21,11 +19,13 @@ const Comment = ({ postId }) => {
   return (
     <div className="w-[50%] relative block group font-medium">
       <h1 className="text-3xl font-bold my-5 ">Comments</h1>
-      {/* // TODO: comments 더미데이터를 돌며 각 댓글마다 CommentElement를
-      만들어주세요! // Hint: CommentElement에는 댓글인 comment와 댓글 삭제를
-      하는 handleCommentDelete라는 props가 필요합니다. // TODO: 새로운 댓글을
-      작성하는 form을 만들어주세요! */}
-      <CommentElement />
+      {commentsarr.map((comment) => (
+        <CommentElement
+          key={comment.id}
+          comment={comment}
+          handleCommentDelete={handleCommentDelete}
+        />
+      ))}
       <form
         onSubmit={handleCommentSubmit}
         className="flex flex-row items-center justify-center mt-10 gap-2"
