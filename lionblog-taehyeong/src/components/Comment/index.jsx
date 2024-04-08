@@ -50,7 +50,7 @@ const Comment = ({ postId }) => {
   }, []);
 
   return (
-    <div className="w-full mt-5 self-start">
+    <div className="w-full mt-5 self-start mb-8">
       <h1 className="text-3xl font-bold my-5">Comments</h1>
       {commentsData &&
         commentsData.map((comment) => (

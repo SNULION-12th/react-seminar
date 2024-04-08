@@ -49,21 +49,21 @@ const CommentElement = ({ comment, handleCommentDelete }) => {
       <div className="flex flex-row items-center gap-3">
         {isEditMode ? (
           <>
-            <button className="button" onClick={toShowMode}>
+            <button className="button-no-bg" onClick={toShowMode}>
               취소
             </button>
-            <button className="button">완료 </button>
+            <button className="button-no-bg">완료 </button>
           </>
         ) : (
           <>
             <button
-              className="button"
+              className="button-no-bg"
               type="button"
               onClick={handleCommentDelete(comment.id)}
             >
               삭제
             </button>
-            <button className="button" type="button" onClick={toEditMode}>
+            <button className="button-no-bg" type="button" onClick={toEditMode}>
               수정
             </button>
           </>
