@@ -10,7 +10,7 @@ const Comment = ({ postId }) => {
   const handleCommentSubmit = (e) => {
     e.preventDefault();
     alert("댓글 작성"); // add api call for creating comment
-    // TODO: 댓글을 추가했으니 새로운 댓글을 저장하는 state를 초기화해야겠죠?
+    setcommentInput("");
   };
 
   const handleCommentDelete = (commentId) => {
@@ -25,14 +25,22 @@ const Comment = ({ postId }) => {
       만들어주세요! // Hint: CommentElement에는 댓글인 comment와 댓글 삭제를
       하는 handleCommentDelete라는 props가 필요합니다. // TODO: 새로운 댓글을
       작성하는 form을 만들어주세요! */}
-      <form className="flex flex-row items-center justify-center mt-10 gap-2">
+      <CommentElement />
+      <form
+        onSubmit={handleCommentSubmit}
+        className="flex flex-row items-center justify-center mt-10 gap-2"
+      >
         <div className="flex w-full h-12">
           <input
             className="input"
             type="text"
             placeholder="댓글을 입력해주세요"
+            value={commentInput}
+            onChange={(e) => {
+              setcommentInput(e.target.value);
+            }}
           ></input>
-          <button type="button" className="button ml-3 w-24">
+          <button type="submit" className="button ml-3 w-24">
             작성
           </button>
         </div>
