@@ -56,6 +56,7 @@ export const PostWriteTemplate = ({ initial, mode }) => {
     setPost(data);
     setTagInputValue("");
   };
+
   const updateTitle = (e) => setPost({ ...post, title: e.target.value });
   const updateContent = (e) => setPost({ ...post, content: e.target.value });
   const deleteTag = (tagId) => {
