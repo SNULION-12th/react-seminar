@@ -1,46 +1,44 @@
-import { useNavigate, useParams } from "react-router-dom";
-import posts from "../data/posts";
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
+// 추가 👇🏻
+import { useParams, Link, useNavigate } from "react-router-dom";
+// 추가 👆🏻
 import { BigPost } from "../compoents/Posts";
+import posts from "../data/posts";
+import Comments from "../compoents/Comment";
 
 const PostDetailPage = () => {
   const { postId } = useParams();
-  const nav = useNavigate();
 
   const [post, setPost] = useState(null);
   useEffect(() => {
     const post = posts.find((post) => post.id === parseInt(postId));
     setPost(post);
   }, [postId]);
-
+  // 추가 👇🏻
+  const navigate = useNavigate();
+  const onClickDelete = () => {
+    alert("게시물을 삭제합니다.");
+    navigate("/");
+    // add api call for deleting post
+  };
+  // 추가 👆🏻
   return (
-    <div className="w-[100%] bottom-0 flex justify-center flex-col items-center">
-      <BigPost post={post} />
-      <div>
-        <form className="form gap-2 mb-5">
-          <div className="flex flex-row items-center gap-5">
-            <button
-              type="reset"
-              className="button mt-7"
-              onClick={() => {
-                nav(`/${postId}/edit`);
-              }}
-            >
-              수정
-            </button>
-            <button
-              type="submit"
-              className="button mt-7"
-              onClick={() => {
-                alert("삭제");
-              }}
-            >
+    post && (
+      <>
+        <div className="flex flex-col items-center w-[60%] p-8">
+          <BigPost post={post} />
+          <div className="flex flex-row gap-3">
+            <Link to={`/${post.id}/edit`}>
+              <button className="button mt-10 py-2 px-10">수정</button>
+            </Link>
+            <button className="button mt-10 py-2 px-10" onClick={onClickDelete}>
               삭제
             </button>
           </div>
-        </form>
-      </div>
-    </div>
+        </div>
+        <Comments />
+      </>
+    )
   );
 };
 

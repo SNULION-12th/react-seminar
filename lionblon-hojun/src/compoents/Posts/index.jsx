@@ -1,4 +1,8 @@
 export const SmallPost = ({ post, onClick }) => {
+  const onClickLike = () => {
+    alert("나도 좋아!");
+    // add api call for liking post here
+  };
   return (
     <div
       className="w-64 relative block group py-10 px-8 mr-5 my-5 ring-8 ring-transparent border-2 border-box border-white hover:bg-orange-400 hover:text-black hover:border-transparent hover:ring-orange-200 rounded-xl font-medium"
@@ -13,12 +17,18 @@ export const SmallPost = ({ post, onClick }) => {
           </span>
         ))}
       </div>
-      <div>{post.like_users.length > 0 && `❤️ ${post.like_users.length}`}</div>
+      <div onClick={onClickLike} className="cursor-pointer">
+        {post.like_users.length > 0 && `❤️ ${post.like_users.length}`}
+      </div>
     </div>
   );
 };
 
 export const BigPost = ({ post }) => {
+  const onClickLike = () => {
+    alert("나도 좋아!");
+    // add api call for liking post here
+  };
   return (
     <div className="bg-orange-400 w-[50vw] h-[30vh] mt-7 mb-5 rounded-xl border-orange-300 border-4">
       {post && (
@@ -39,7 +49,12 @@ export const BigPost = ({ post }) => {
               </span>
             ))}
           </div>
-          <div className="mt-4">🖤{post.like_users.length}</div>
+          <div
+            onClick={onClickLike}
+            className="flex flex-row text-black cursor-pointer"
+          >
+            ❤️ {post.like_users.length > 0 ? post.like_users.length : "0"}
+          </div>
         </div>
       )}
     </div>
