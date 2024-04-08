@@ -170,7 +170,7 @@ const PostCreatePage = () => {
             ))}
           </div>
         )}
-        <button type="submit" className="button mt-7">
+        <button type="submit" className="small-button">
           완료
         </button>
       </form>
