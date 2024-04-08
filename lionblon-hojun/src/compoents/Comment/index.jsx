@@ -7,13 +7,26 @@ const Comment = ({ postId }) => {
   const [commentInput, setcommentInput] = useState("");
   const handleCommentSubmit = (e) => {
     e.preventDefault();
-    alert("댓글 작성"); // add api call for creating comment
+    const currentDate = new Date();
+    const isoDateString = currentDate.toISOString();
+    // alert("댓글 작성"); // add api call for creating comment
+    const newComment = {
+      id: Date.now(),
+      content: commentInput,
+      created_at: isoDateString,
+      post: postId,
+      author: {},
+    };
+    setcommentsarr([...commentsarr, newComment]);
     setcommentInput("");
   };
 
   const handleCommentDelete = (commentId) => {
-    console.log(commentId);
-    alert("댓글 삭제"); // add api call for deleting comment
+    const filteredCommentarr = commentsarr.filter(
+      (comment) => comment.id !== commentId
+    );
+    setcommentsarr(filteredCommentarr);
+    // alert("댓글 삭제"); // add api call for deleting comment
   };
 
   return (

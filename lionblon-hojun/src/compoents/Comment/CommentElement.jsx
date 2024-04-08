@@ -68,7 +68,12 @@ const CommentElement = ({ comment, handleCommentDelete }) => {
           </div>
         ) : (
           <div>
-            <button className="mr-2" onClick={handleCommentDelete}>
+            <button
+              className="mr-2"
+              onClick={() => {
+                handleCommentDelete(comment.id);
+              }}
+            >
               삭제
             </button>
             <button onClick={handleEditComment}>수정</button>
