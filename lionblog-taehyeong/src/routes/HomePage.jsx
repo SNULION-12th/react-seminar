@@ -13,7 +13,11 @@ const HomePage = () => {
   const [searchTags, setSearchTags] = useState([]);
   const [searchValue, setSearchValue] = useState([]);
 
-  const handleChange = (e) => {};
+  const handleChange = (e) => {
+    const { value } = e.target;
+    const newTags = tags.filter((tag) => tag.includes(value));
+    setSearchTags(newTags);
+  };
 
   const handleTagFilter = (e) => {
     const { innerText } = e.target;

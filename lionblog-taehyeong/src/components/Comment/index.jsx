@@ -22,7 +22,7 @@ const Comment = ({ postId }) => {
       {
         id: newId,
         content: commentInputValue,
-        created_at: "2024-01-01T15:09:43Z",
+        created_at: new Date(),
         post: 1,
         author: {
           id: 2,
