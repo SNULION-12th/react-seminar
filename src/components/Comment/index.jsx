@@ -24,14 +24,15 @@ const Comment = ({ postId }) => {
         // alert("댓글 작성");
         // 댓글을 추가했으니 새로운 댓글을 저장하는 state를 초기화
         setCommentList([...commentList, newComment]);
-        setCommentId(commentId+1);
+        // set한 state를 set하는데 또 사용하면 비동기화 문제가 발생할 수 있음...
         setNewComment({
-            id: commentId,
+            id: commentId+1,
             content: "",
             created_at: new Date().toISOString(),
             post: postId,
             author: { id: 99, username: "아기사자" },
         });
+        setCommentId(commentId+1);
     };
     const handleCommentEdit = (commentId, editContent) => {
         // console.log(commentId);
