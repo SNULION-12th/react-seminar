@@ -2,8 +2,12 @@
 
 # dependencies
 /node_modules
+*node_modules/*
 /.pnp
 .pnp.js
+
+/lionblog-yunhee
+/lionblog-yunhee/node_modules
 
 # testing
 /coverage
