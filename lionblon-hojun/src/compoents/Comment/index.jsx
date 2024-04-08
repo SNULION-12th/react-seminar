@@ -29,6 +29,17 @@ const Comment = ({ postId }) => {
     // alert("댓글 삭제"); // add api call for deleting comment
   };
 
+  const handleEditComment = (commentId, editedComment) => {
+    const filteredCommentarr = commentsarr.filter((comment) => {
+      if (comment.id === commentId) {
+        comment.content = editedComment;
+        return comment;
+      }
+      return comment;
+    });
+    setcommentsarr(filteredCommentarr);
+  };
+
   return (
     <div className="w-[50%] relative block group font-medium">
       <h1 className="text-3xl font-bold my-5 ">Comments</h1>
@@ -37,6 +48,7 @@ const Comment = ({ postId }) => {
           key={comment.id}
           comment={comment}
           handleCommentDelete={handleCommentDelete}
+          handleEditComment={handleEditComment}
         />
       ))}
       <form
