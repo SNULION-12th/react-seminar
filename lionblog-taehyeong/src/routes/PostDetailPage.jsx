@@ -46,7 +46,7 @@ const PostDetailPage = () => {
         {post && (
           <>
             <BigPost post={post} updater={setPost} date={date} />
-            <Comment />
+            <Comment posdId={postId} />
             <div className="flex flex-row justify-center gap-5">
               <Link to={`/${postId}/edit`}>
                 <button className="button">수정</button>

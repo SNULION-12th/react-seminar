@@ -30,7 +30,6 @@ const Comment = ({ postId }) => {
         },
       },
     ]);
-    alert("댓글 작성"); // add api call for creating comment
 
     setCommentInputValue("");
   };
@@ -41,7 +40,6 @@ const Comment = ({ postId }) => {
       (comment) => comment.id !== commentId
     );
     setCommentsData([...updatedComments]);
-    alert("댓글 삭제"); // add api call for deleting comment
   };
 
   useEffect(() => {
