@@ -10,20 +10,24 @@ const Comment = ({ postId }) => {
 
   const handleCommentSubmit = (e) => {
     e.preventDefault();
-    // alert("댓글 작성"); // add api call for creating comment
-    // TODO: 댓글을 추가했으니 새로운 댓글을 저장하는 state를 초기화해야겠죠?
-    setCommentList([
-      ...commentList,
-      {
-        id: commentList.length + 1,
-        postId,
-        content: newContent,
-        created_at: "2024-04-08T15:09:43Z",
-      },
-    ]);
+
+    let maxId = 0;
+    commentList.forEach((comment) => {
+      if (comment.id > maxId) {
+        maxId = comment.id;
+      }
+    });
+
+    const newComment = {
+      id: maxId + 1,
+      postId,
+      content: newContent,
+      created_at: "2024-04-08T15:09:43Z",
+    };
+
+    setCommentList([...commentList, newComment]);
     setNewContent("");
   };
-
   const handleCommentDelete = (commentId) => {
     // console.log(commentId);
     // alert("댓글 삭제"); // add api call for deleting comment
@@ -52,6 +56,7 @@ const Comment = ({ postId }) => {
       {commentList.map((comment) => (
         <CommentElement
           comment={comment}
+          key={comment.id}
           handleCommentDelete={handleCommentDelete}
           handleCommentEdit={handleCommentEdit}
         />

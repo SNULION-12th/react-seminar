@@ -20,7 +20,7 @@ const CommentElement = (props) => {
 
   const handleEditComment = (e) => {
     // 댓글 수정 API 호출
-    alert("댓글 수정");
+    // alert("댓글 수정");
     setIsEdit(!isEdit);
     handleCommentEdit(comment.id, content);
   };
