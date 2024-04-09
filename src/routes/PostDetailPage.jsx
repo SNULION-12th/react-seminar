@@ -15,6 +15,12 @@ const PostDetailPage = () => {
     alert("삭제");
     //TODO : api connect(delete post)
   };
+  const navigate = useNavigate();
+  const onClickDelete = () => {
+    alert("게시물을 삭제합니다.");
+    navigate("/");
+    // add api call for deleting post
+  };
 
   return (
     post && (
