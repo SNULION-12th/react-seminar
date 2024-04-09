@@ -20,6 +20,7 @@ const Header = () => {
       </Link>
       <div className="flex">
         {isUserLoggedIn ? (
+          
           <Link to="/" className="mr-10 p-3 uppercase text-lg">
             sign out
           </Link>
