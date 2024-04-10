@@ -1,5 +1,23 @@
+import { useState } from "react";
+
 const SignUpPage = () => {
-  const handleSignUpSubmit = () => {
+  const [signUpData, setSignUpData] = useState({
+    email: "",
+    password: "",
+    confirm_password: "",
+    username: "",
+    college: "",
+    major: "",
+  });
+
+  const handleSignUpData = (e) => {
+    const { id, value } = e.target;
+    setSignUpData({ ...signUpData, [id]: value });
+  };
+
+  const handleSignUpSubmit = (e) => {
+    e.preventDefault();
+    console.log(signUpData);
     alert("회원가입 하기"); // TODO: add api call for sign up
   };
 
@@ -10,17 +28,38 @@ const SignUpPage = () => {
         <label htmlFor="email" className="label">
           *이메일:
         </label>
-        <input required type="email" id="email" className="input" />
+        <input
+          required
+          type="email"
+          id="email"
+          className="input"
+          onChange={handleSignUpData}
+          value={signUpData.email}
+        />
 
         <label required htmlFor="username" className="label">
           *유저 이름:
         </label>
-        <input required type="text" id="username" className="input" />
+        <input
+          required
+          type="text"
+          id="username"
+          className="input"
+          onChange={handleSignUpData}
+          value={signUpData.username}
+        />
 
         <label htmlFor="password" className="label">
           *비밀번호:
         </label>
-        <input required type="password" id="password" className="input" />
+        <input
+          required
+          type="password"
+          id="password"
+          className="input"
+          onChange={handleSignUpData}
+          value={signUpData.password}
+        />
 
         <label htmlFor="confirm_password" className="label">
           *비밀번호 확인:
@@ -30,17 +69,31 @@ const SignUpPage = () => {
           type="password"
           id="confirm_password"
           className="input"
+          onChange={handleSignUpData}
+          value={signUpData.confirm_password}
         />
 
         <label htmlFor="college" className="label">
           대학:{" "}
         </label>
-        <input type="text" id="college" className="input" />
+        <input
+          type="text"
+          id="college"
+          className="input"
+          onChange={handleSignUpData}
+          value={signUpData.college}
+        />
 
         <label htmlFor="major" className="label">
           전공:{" "}
         </label>
-        <input type="text" id="major" className="input" />
+        <input
+          type="text"
+          id="major"
+          className="input"
+          onChange={handleSignUpData}
+          value={signUpData.major}
+        />
 
         <div className="flex flex-row items-center gap-5">
           <button type="reset" className="button mt-7">

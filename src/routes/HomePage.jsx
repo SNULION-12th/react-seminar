@@ -1,11 +1,49 @@
 import { SmallPost } from "../components/Posts";
 import { Link } from "react-router-dom";
 import posts from "../data/posts";
+import { useState, useEffect } from "react";
 
 const HomePage = () => {
-  const postList = posts;
+  const [tags, setTags] = useState([]);
+  const [searchTags, setSearchTags] = useState([]);
+  const [searchValue, setSearchValue] = useState("");
+  const [postList, setPostList] = useState(posts);
 
-  const handleChange = (e) => {};
+  const handleChange = (e) => {
+    const { value } = e.target;
+    const newTags = tags.filter((tag) => tag.includes(value));
+    setSearchTags(newTags);
+  };
+
+  const handleTagFilter = (e) => {
+    const { innerText } = e.target;
+    //if search input is empty str "" -> show all posts
+    if (searchValue === innerText.substring(1)) {
+      setSearchValue("");
+      setPostList(posts);
+    } else {
+      const activeTag = innerText.substring(1);
+      setSearchValue(activeTag);
+      const newPosts = posts.filter((post) =>
+        post.tags.find((tag) => tag.content === activeTag)
+      );
+      setPostList(newPosts);
+    }
+  };
+
+  //모든 post 안에 있는 모든 tag를 acc 라는 set 에 넣어줌
+  //.reduce() has an accumulator that accumulates your calculation when processing each element in the array "posts"
+  useEffect(() => {
+    const tagList = posts.reduce((acc, post) => {
+      for (let tag of post.tags) {
+        acc.add(tag.content);
+      }
+      return acc;
+    }, new Set());
+    //make "tags" and "searchTags" equal these sets
+    setTags([...tagList]);
+    setSearchTags([...tagList]);
+  }, []);
 
   return (
     <div>
@@ -20,7 +58,21 @@ const HomePage = () => {
           className="border border-orange-400 outline-none rounded-2xl text-center py-2 px-20 text-orange-400 bg-transparent"
         />
       </div>
+      <div className="flex mt-5 justify-center">
+        {searchTags.map((tag) => {
+          return (
+            <button
+              key={tag}
+              className={tag === searchValue ? "tag active mr-2" : "tag mr-2"}
+              onClick={handleTagFilter}
+            >
+              #{tag}
+            </button>
+          );
+        })}
+      </div>
       <div className="grid grid-cols-3 px-10 mt-10">
+        {/*iterate through postList and display each tag as a tag button*/}
         {postList.map((post) => (
           <SmallPost key={post.id} post={post} />
         ))}
