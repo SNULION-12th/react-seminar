@@ -35,10 +35,23 @@ const Comment = ({ postId }) => {
   const handleCommentDelete = (commentId) => {
     console.log(commentId);
     alert("댓글 삭제"); // add api call for deleting comment
-    setCommentsList({
-      ...commentsList,
-      id: commentsList.id.filter((idd) => idd !== commentId),
+    //setCommentsList({...commentsList, id: commentsList.id.filter((idd) => idd !== commentId),});
+    const updatedCommentsList = commentsList.filter(
+      (comment) => comment.id !== commentId
+    );
+    setCommentsList(updatedCommentsList);
+  };
+
+  const handleCommentEdit = (commentId, newContent) => {
+    const updatedCommentsList = commentsList.map((comment) => {
+      if (comment.id === commentId) {
+        // Update the content of the edited comment
+        return { ...comment, content: newContent };
+      }
+      return comment; // Return unchanged comment if not the one being edited
     });
+
+    setCommentsList(updatedCommentsList);
   };
 
   return (
@@ -54,6 +67,7 @@ const Comment = ({ postId }) => {
           comment={comment}
           handleCommentDelete={handleCommentDelete}
           postId={postId}
+          handleCommentEdit={handleCommentEdit}
         ></CommentElement>
       ))}
       {

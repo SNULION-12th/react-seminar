@@ -1,6 +1,11 @@
 import { useState, useEffect } from "react";
 
-const CommentElement = ({ comment, handleCommentDelete, postId }) => {
+const CommentElement = ({
+  comment,
+  handleCommentDelete,
+  postId,
+  handleCommentEdit,
+}) => {
   /* TODO: props 받기
        Hint: src/components/Comment/index.jsx에서 어떠한 props를 넘겨주는지 확인해보세요! */
 
@@ -8,6 +13,10 @@ const CommentElement = ({ comment, handleCommentDelete, postId }) => {
        Hint: 댓글의 내용을 저장하는 state와 수정 중인지 여부를 저장하는 state를 따로 만드는 게 좋겠죠? */
   const [commentContent, setCommentContent] = useState(comment.content);
   const [isEditing, setIsEditing] = useState(false);
+
+  const handleCommentChanges = (e) => {
+    setCommentContent(e.target.value);
+  };
 
   // comment created_at 전처리
   const date = new Date(comment.created_at);
@@ -33,8 +42,9 @@ const CommentElement = ({ comment, handleCommentDelete, postId }) => {
         }
         {isEditing ? (
           <input
-            defaultValue={comment.content}
-            className="border-2 border-orange-400 bg-black text-white p-3 rounded-2xl"
+            value={commentContent}
+            onChange={handleCommentChanges}
+            className="border-2 border-orange-400 bg-black text-white p-3 rounded-2xl w-4/5"
           />
         ) : (
           <p className="bg-black text-white">{comment.content}</p>
@@ -50,16 +60,31 @@ const CommentElement = ({ comment, handleCommentDelete, postId }) => {
       <div className="flex flex-row items-center gap-3">
         {isEditing ? (
           <div>
-            <button className="p-2" onClick={() => setIsEditing(false)}>
+            <button
+              className="p-2"
+              onClick={() => {
+                setIsEditing(false);
+                setCommentContent(comment.content);
+              }}
+            >
               취소
             </button>
-            <button className="p-2" onClick={() => setIsEditing(false)}>
+            <button
+              onClick={() => {
+                setIsEditing(false);
+                handleCommentEdit(comment.id, commentContent);
+              }}
+              className="p-2"
+            >
               완료
             </button>
           </div>
         ) : (
           <div>
-            <button className="p-2" onClick={handleCommentDelete}>
+            <button
+              className="p-2"
+              onClick={() => handleCommentDelete(comment.id)}
+            >
               삭제
             </button>
             <button className="p-2" onClick={() => setIsEditing(true)}>
