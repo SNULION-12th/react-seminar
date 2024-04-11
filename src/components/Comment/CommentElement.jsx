@@ -44,10 +44,10 @@ const CommentElement = ({
       <div className="flex flex-row items-center gap-3">
         {isEdit ? (
           <div>
-            <button className="p=2" onClick={() => setIsEdit(false)}>
+            <button className="p-2" onClick={() => setIsEdit(false)}>
               취소
             </button>
-            <button className="p=2" onClick={handleEditComment}>
+            <button className="p-2" onClick={handleEditComment}>
               완료
             </button>
           </div>
