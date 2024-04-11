@@ -50,10 +50,7 @@ const CommentElement = ({ comment, handleCommentDelete }) => {
           <p>{content}</p>
         )}
 
-        <span className="text-base text-gray-300">
-          {/* {year}.{month}.{day} */}
-          {date}
-        </span>
+        <span className="text-base text-gray-300">{date}</span>
       </div>
 
       <div className="flex flex-row items-center gap-3">

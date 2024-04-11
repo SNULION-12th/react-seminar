@@ -17,6 +17,7 @@ const Comment = ({ postId }) => {
 
     const sortedData = commentsData.sort((a, b) => a.id - b.id);
     const newId = sortedData[sortedData.length - 1].id + 1;
+    console.log(newId);
     setCommentsData([
       ...commentsData,
       {
@@ -40,6 +41,7 @@ const Comment = ({ postId }) => {
       (comment) => comment.id !== commentId
     );
     setCommentsData([...updatedComments]);
+    console.log(commentId);
   };
 
   useEffect(() => {
@@ -52,7 +54,7 @@ const Comment = ({ postId }) => {
       {commentsData &&
         commentsData.map((comment) => (
           <CommentElement
-            key={commentsData.id}
+            key={comment.id}
             comment={comment}
             handleCommentDelete={handleCommentDelete}
           />
