@@ -16,7 +16,7 @@ export const DarkModeContext = createContext(false);
 export const PostsDataContext = createContext(null);
 
 function App() {
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(true);
 
   const darkModeToggle = () => setDarkMode(!darkMode);
 

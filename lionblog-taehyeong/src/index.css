@@ -18,18 +18,23 @@
 }
 /* 모든 버튼 일괄 적용 */
 .button {
-  @apply bg-orange-400 text-white font-medium hover:text-black rounded-2xl text-lg px-7 py-2;
+  @apply bg-orange-400 text-white font-medium hover:text-black rounded-2xl text-lg px-7 py-2 shrink-0;
 }
+
+.button-no-bg {
+  @apply font-medium px-3 py-3 hover:opacity-50;
+}
+
 /* 모든 form 일괄 적용 */
 .form {
-  @apply w-full flex flex-col items-center;
+  @apply w-full flex flex-col items-center relative;
 }
 .label {
   @apply self-start mt-5 mb-2 align-middle ml-3;
 }
 /* 모든 input 일괄 적용 */
 .input {
-  @apply border-2  w-full px-6 py-3 rounded-2xl bg-transparent placeholder-opacity-50 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-transparent;
+  @apply border-2 px-6 py-3 rounded-2xl bg-transparent placeholder-opacity-50 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-transparent w-full shrink;
 }
 
 .input-dark {

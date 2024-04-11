@@ -44,7 +44,6 @@ export const PostWriteTemplate = ({ initial, mode }) => {
   const darkMode = useContext(DarkModeContext);
   const posts = useContext(PostsDataContext);
 
-  // const updateTempTag = (e) => setPost({ ...post, temp_tag: e.target.value });
   const updateTags = () => {
     const data = { ...post };
     const validTags = data.tags.filter((tag) => !!tag);
@@ -52,23 +51,19 @@ export const PostWriteTemplate = ({ initial, mode }) => {
 
     data.tags.push({
       id: tagSorted.length === 0 ? 1 : tagSorted[tagSorted.length - 1].id + 1,
-      content: post.temp_tag,
+      content: tagInputValue,
     });
-    data.temp_tag = "";
     setPost(data);
+    setTagInputValue("");
   };
+
   const updateTitle = (e) => setPost({ ...post, title: e.target.value });
   const updateContent = (e) => setPost({ ...post, content: e.target.value });
   const deleteTag = (tagId) => {
     const data = { ...post };
     const afterDeleted = data.tags.filter((tag) => tag && tag.id !== tagId);
     setPost({ ...post, tags: afterDeleted });
-    // data.tags.forEach((tag, index, array) => {
-    //   if (tag && tag.id === tagId) array[index] = null;
-    // });
   };
-
-  // tag autoComplete
 
   const onSumbitMethod = (mode) => {
     if (mode === "작성") {
@@ -82,16 +77,17 @@ export const PostWriteTemplate = ({ initial, mode }) => {
       posts.push({
         ...post,
         id: newId,
-        author: author,
-        created_at: created_at,
+        author,
+        created_at,
       });
+      navigate(`/${newId}`);
     } else if (mode === "수정") {
       alert("게시물을 수정합니다.");
       posts.forEach((p, i, arr) => {
         if (p && p.id === post.id) arr[i] = { ...post };
       });
+      navigate(`/${initial.id}`);
     }
-    navigate("/");
   };
 
   useEffect(() => {
@@ -102,7 +98,6 @@ export const PostWriteTemplate = ({ initial, mode }) => {
     }, new Set());
     const tagList = [...duplicatedTagList];
     setTags([...tagList]);
-    console.log("tagList", tagList);
   }, []);
 
   useEffect(() => {
@@ -159,13 +154,14 @@ export const PostWriteTemplate = ({ initial, mode }) => {
             추가
           </button>
         </div>
-        <div className="flex mt-2 bg-black border-gray-500 rounded-2xl w-full">
+        <div className="flex mt-2 border-gray-500 rounded-2xl w-full">
           {autoCompletes &&
             autoCompletes.map((autoComplete) => (
               <button
                 className="tag rounded-2xl text-start border-gray-500 py-2 px-3 text-white focus:bg-gray"
                 key={autoComplete}
                 onClick={() => handleAutoCompletes(autoComplete)}
+                type="button"
               >
                 #{autoComplete}
               </button>

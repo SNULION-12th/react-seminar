@@ -3,6 +3,7 @@ import { BigPost } from "../components/Posts";
 import { useEffect, useState, useContext } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { PostsDataContext } from "../App";
+import Comment from "../components/Comment";
 
 const PostDetailPage = () => {
   const navigate = useNavigate();
@@ -26,6 +27,7 @@ const PostDetailPage = () => {
   useEffect(() => {
     const post = posts.find((post) => post && post.id === parseInt(postId));
     if (post) setPost(post);
+    // console.log(postId);
   }, [postId]);
 
   useEffect(() => {
@@ -45,6 +47,7 @@ const PostDetailPage = () => {
         {post && (
           <>
             <BigPost post={post} updater={setPost} date={date} />
+            <Comment postId={postId} />
             <div className="flex flex-row justify-center gap-5">
               <Link to={`/${postId}/edit`}>
                 <button className="button">수정</button>
