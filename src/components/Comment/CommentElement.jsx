@@ -73,7 +73,6 @@ const CommentElement = ({
             <button
               className="small-button"
               onClick={() => {
-                console.log(comment);
                 handleCommentDelete(comment.id);
               }}
             >

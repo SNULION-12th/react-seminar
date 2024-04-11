@@ -4,7 +4,9 @@ import CommentElement from "./CommentElement";
 
 const Comment = ({ postId }) => {
   // TODO: comments를 저장하기 위한 state를 만들어주세요
-  const [commentsList, setCommentsList] = useState(comments);
+  const [commentsList, setCommentsList] = useState(
+    comments.filter((comment) => comment.post === parseInt(postId))
+  );
   // TODO: 새로운 댓글을 추가하기 위한 state를 만들어주세요
   const [commentInputValue, setCommentInputValue] = useState("");
   const [newId, setNewID] = useState(4);
@@ -25,7 +27,7 @@ const Comment = ({ postId }) => {
 
   const editOriginalComment = (commentId, editedText) => {
     const updatedComments = commentsList.map((comment) => {
-      if (comment.id == commentId) {
+      if (comment.id === commentId) {
         return { ...comment, content: editedText };
       }
       return comment;
