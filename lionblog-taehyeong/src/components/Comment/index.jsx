@@ -15,8 +15,11 @@ const Comment = ({ postId }) => {
     e.preventDefault();
     if (commentInputValue.length === 0) return;
 
-    const sortedData = commentsData.sort((a, b) => a.id - b.id);
-    const newId = sortedData[sortedData.length - 1].id + 1;
+    const newId =
+      commentsData.length > 0
+        ? commentsData.sort((a, b) => a.id - b.id)[commentsData.length - 1].id +
+          1
+        : 1;
 
     setCommentsData([
       ...commentsData,
