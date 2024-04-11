@@ -74,7 +74,7 @@ const HomePage = () => {
           );
         })}
       </div>
-      <div className="flex flex-col items-center sm:grid xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 px-10 mt-10">
+      <div className="max-sm:flex max-sm:flex-col max-sm:items-center sm:grid xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 px-10 mt-10">
         {visiblePosts.map((post) =>
           post ? <SmallPost key={post.id} post={post} /> : null
         )}
