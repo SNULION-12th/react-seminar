@@ -61,6 +61,7 @@ const Comment = ({ postId }) => {
       <h1 className="text-3xl font-bold my-5">Comments</h1>
       {commentsList.map((singleComment) => (
         <CommentElement
+          commentId={singleComment.id}
           comment={singleComment}
           handleCommentDelete={handleCommentDelete}
           editOriginalComment={editOriginalComment}
