@@ -1,11 +1,21 @@
 import { Link } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
 import { DarkModeContext } from "../../App";
 
 import lion from "../../assets/images/lion.jpeg";
 
 const Header = ({ darkModeToggle }) => {
   const darkMode = useContext(DarkModeContext);
+
+  const [isUserLoggedIn, setIsUserLoggedIn] = useState(false); // 로그인 여부 상태, 우선 false로 초기화
+
+  const handleSignOut = () => {
+    // TODO: 이후 api 연결 시 token 제거
+  };
+
+  useEffect(() => {
+    // TODO: 이후 api 연결 시 유효한 token이 있다면 setIsUserLoggedIn(true)로 상태 변경하는 코드 작성
+  }, []);
 
   return (
     <div
@@ -16,12 +26,20 @@ const Header = ({ darkModeToggle }) => {
         <div className="text-xl">SNULION BLOG</div>
       </Link>
       <div className="flex">
-        <Link to="/signin" className="mr-10 p-3 uppercase text-lg">
-          sign in
-        </Link>
-        <Link to="/signup" className="mr-10 p-3 uppercase text-lg">
-          sign up
-        </Link>
+        {isUserLoggedIn ? (
+          <Link to="/" className="mr-10 p-3 uppercase text-lg">
+            sign out
+          </Link>
+        ) : (
+          <>
+            <Link to="/signin" className="mr-10 p-3 uppercase text-lg">
+              sign in
+            </Link>
+            <Link to="/signup" className="mr-10 p-3 uppercase text-lg">
+              sign up
+            </Link>
+          </>
+        )}
         <button onClick={darkModeToggle}>
           <svg
             xmlns="http://www.w3.org/2000/svg"

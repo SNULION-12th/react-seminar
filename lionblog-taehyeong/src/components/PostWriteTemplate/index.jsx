@@ -77,8 +77,8 @@ export const PostWriteTemplate = ({ initial, mode }) => {
       posts.push({
         ...post,
         id: newId,
-        author: author,
-        created_at: created_at,
+        author,
+        created_at,
       });
     } else if (mode === "수정") {
       alert("게시물을 수정합니다.");
