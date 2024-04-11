@@ -1,11 +1,9 @@
 import { useState, useEffect } from "react";
-
 import { Link } from "react-router-dom";
-
 import lion from "../../assets/images/lion.jpeg";
 
 const Header = () => {
-  const [isUserLoggedIn, stateIsUserLoggedIn] = useState(false);
+  const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
 
   useEffect(() => {
     // TODO: 이후 api 연결 시 유효한 token이 있다면 setIsUserLoggedIn(true)로 상태 변경하는 코드 작성

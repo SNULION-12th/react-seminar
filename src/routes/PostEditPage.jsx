@@ -28,7 +28,7 @@ const PostEditPage = () => {
     }, new Set());
     const tagList = [...duplicatedTagList];
     setTags([...tagList]);
-  }, []);
+  }, []); 
 
   // 기존 게시글 불러오기
   useEffect(() => {
