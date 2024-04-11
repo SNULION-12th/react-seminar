@@ -59,7 +59,7 @@ const HomePage = () => {
           className="border border-orange-400 outline-none rounded-2xl text-center py-2 px-20 text-orange-400 bg-transparent"
         />
       </div>
-      <div className="flex mt-5 justify-center">
+      <div className="flex mt-5 justify-center flex-wrap">
         {searchTags.map((tag) => {
           return (
             <button
@@ -74,7 +74,7 @@ const HomePage = () => {
           );
         })}
       </div>
-      <div className="grid grid-cols-4 px-10 mt-10">
+      <div className="flex flex-col items-center sm:grid xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 px-10 mt-10">
         {visiblePosts.map((post) =>
           post ? <SmallPost key={post.id} post={post} /> : null
         )}
