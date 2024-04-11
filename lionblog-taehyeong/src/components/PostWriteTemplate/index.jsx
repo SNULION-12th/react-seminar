@@ -80,13 +80,14 @@ export const PostWriteTemplate = ({ initial, mode }) => {
         author,
         created_at,
       });
+      navigate(`/${newId}`);
     } else if (mode === "수정") {
       alert("게시물을 수정합니다.");
       posts.forEach((p, i, arr) => {
         if (p && p.id === post.id) arr[i] = { ...post };
       });
+      navigate(`/${initial.id}`);
     }
-    navigate("/");
   };
 
   useEffect(() => {
@@ -97,7 +98,6 @@ export const PostWriteTemplate = ({ initial, mode }) => {
     }, new Set());
     const tagList = [...duplicatedTagList];
     setTags([...tagList]);
-    console.log("tagList", tagList);
   }, []);
 
   useEffect(() => {
