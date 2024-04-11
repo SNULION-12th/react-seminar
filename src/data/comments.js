@@ -1,4 +1,3 @@
-// dummy data
 const comments = [
   {
       "id": 1,
