@@ -17,7 +17,7 @@ const Comment = ({ postId }) => {
 
     const sortedData = commentsData.sort((a, b) => a.id - b.id);
     const newId = sortedData[sortedData.length - 1].id + 1;
-    console.log(newId);
+
     setCommentsData([
       ...commentsData,
       {
@@ -45,8 +45,10 @@ const Comment = ({ postId }) => {
   };
 
   useEffect(() => {
-    setCommentsData(comments);
-  }, []);
+    setCommentsData(
+      comments.filter((comment) => comment.post === parseInt(postId))
+    );
+  }, [postId]);
 
   return (
     <div className="w-full mt-5 self-start mb-8">
