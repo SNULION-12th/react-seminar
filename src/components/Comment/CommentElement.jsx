@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react";
 
-const CommentElement = ({comment, deleteComment}) => {
-    
-    const [editingComment, setEditingComment] = useState(comment);
+const CommentElement = ({comment, deleteComment, editComment}) => {
+
     const [isEditing, setIsEditing] = useState(false);
-    const [currentCommentContent, setCurrentCommentContent] = useState(comment.content);
+    const [editContent, setEditContent] = useState(comment.content);
 
     const date = new Date(comment.created_at);
     const year = date.getFullYear();
@@ -13,23 +12,17 @@ const CommentElement = ({comment, deleteComment}) => {
     let day = date.getDate();
     day = day < 10 ? `0${day}` : day;
     
-    const editCommentStartEnd = () => {
+    const editCommentStartCancel = () => {
         setIsEditing(!isEditing);
-        setCurrentCommentContent(editingComment.content);
-    }
-    const editCommentCancel = () => {
-        setIsEditing(!isEditing);
-        setEditingComment({
-            ...editingComment,
-            content: currentCommentContent,
-        })
-    }
+    };
+
     const handleEditComment = () => {// add api call for editing comment
+        editComment(comment.id, editContent);
+        setIsEditing(false);
     };
 
     const handleCommentData = (e) => {
-        const { id, value } = e.target;
-        setEditingComment({...editingComment, [id]: value});
+        setEditContent(e.target.value);
     }
 
     useEffect(() => { // add api call to check if user is the author of the comment
@@ -43,12 +36,12 @@ const CommentElement = ({comment, deleteComment}) => {
                         type="text"  
                         className="input" 
                         id="content"
-                        value={editingComment.content}
+                        value={editContent.content}
                         onChange={handleCommentData}
                     />
                 ) : (
                     <>
-                        <p>{editingComment.content}</p>
+                        <p>{comment.content}</p>
                         <span className="text-base text-gray-300">{year}.{month}.{day}</span>
                     </>
                 )}
@@ -56,13 +49,13 @@ const CommentElement = ({comment, deleteComment}) => {
 			<div className="flex flex-row items-center gap-3">
                 {isEditing ? (
                     <>
-                        <button onClick={editCommentCancel}>취소</button>
-                        <button onClick={editCommentStartEnd}>완료</button>
+                        <button onClick={editCommentStartCancel}>취소</button>
+                        <button onClick={handleEditComment}>완료</button>
                     </>
                 ) : (
                     <>
                         <button onClick={() => deleteComment(comment.id)}>삭제</button>
-                        <button onClick={editCommentStartEnd}>수정</button>
+                        <button onClick={editCommentStartCancel}>수정</button>
                     
                     </>
                 )}

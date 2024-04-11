@@ -40,15 +40,24 @@ const Comment = ({ postId }) => {
     };
     
     const handleCommentDelete = (commentId) => {
+        console.log(commentId);
         const removeComment = commentList.filter((comment) => comment.id !== parseInt(commentId));
+        console.log(removeComment);
         setCommentList(removeComment);
     };
-
+    const handleCommentEdit = (commentId, commentContent) => {
+        setCommentList(
+            commentList.map((comment) => {
+                if(commentId === comment.id) return {...comment, content: commentContent};
+                else return comment;
+            })
+        );
+    }
     return (
         <div className="w-full mt-5 self-start">
             <h1 className="text-3xl font-bold my-5">Comments</h1>
             {commentList.map((comment) => (
-                <CommentElement comment={comment} deleteComment={handleCommentDelete}/>
+                <CommentElement comment={comment} deleteComment={handleCommentDelete} editComment={handleCommentEdit}/>
             ))}
             <form className="flex flex-row items-center justify-center mt-10 gap-2" >
                 <input 
