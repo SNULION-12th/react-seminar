@@ -19,6 +19,7 @@ const PostCreatePage = () => {
   });
 
   useEffect(() => {
+    // posts 배열의 tags 배열을 하나로 합친 후 중복 제거
     const duplicatedTagList = posts.reduce((acc, post) => {
       for (let tag of post.tags) {
         acc.add(tag.content);

@@ -10,12 +10,15 @@ const HomePage = () => {
   const [searchValue, setSearchValue] = useState("");
 
   useEffect(() => {
+    // accumulator: set 자료구조, 빈 set으로 초기화
+    // post: posts 배열의 각 원소
     const tagList = posts.reduce((acc, post) => {
       for (let tag of post.tags) {
         acc.add(tag.content);
       }
       return acc;
     }, new Set());
+    // tags, searchTags 상태 업데이트
     setTags([...tagList]);
     setSearchTags([...tagList]);
   }, []);
