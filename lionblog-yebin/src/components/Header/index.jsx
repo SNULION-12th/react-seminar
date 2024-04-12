@@ -10,7 +10,7 @@ const Header = () => {
         <div className="text-white text-xl">SNULION BLOG</div>
       </Link>
       <div className="flex">
-        <div className="mr-10 p-3 uppercase text-lg">sign in</div>
+        <div className="mr-10 p-3 uppercase text-lg"></div>
         <Link to="/signin" className="mr-10 p-3 uppercase text-lg">
           sign in
         </Link>
