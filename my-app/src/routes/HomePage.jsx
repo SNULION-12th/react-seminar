@@ -1,11 +1,10 @@
 import { SmallPost } from "../components/Posts";
 import posts from "../data/posts";
 import { Link } from "react-router-dom";
-
 const HomePage = () => {
   const postList = posts;
-  const handleChange = (e) => {};
 
+  const handleChange = (e) => {};
   return (
     <div>
       <div className="flex flex-col justify-center items-center mb-5">
@@ -24,6 +23,7 @@ const HomePage = () => {
           <SmallPost key={post.id} post={post} />
         ))}
       </div>
+
       <div className="flex justify-center m-20">
         <Link className="button" to="/create">
           작성

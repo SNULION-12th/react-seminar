@@ -16,6 +16,10 @@
 .tag.active {
   @apply bg-white text-black;
 }
+.tag-remove {
+  margin-left: 5px;
+  cursor: pointer;
+}
 /* 모든 버튼 일괄 적용 */
 .button {
   @apply bg-orange-400 text-white font-medium hover:text-black rounded-2xl text-lg px-7 py-2;
