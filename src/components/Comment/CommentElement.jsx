@@ -50,7 +50,7 @@ const CommentElement = (props) => {
             className="input"
             required
             type="text"
-            defaultValue={comment.content}
+            defaultValue={commentEditValue}
             onChange={handleChange}
           />
         ) : (
