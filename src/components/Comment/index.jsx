@@ -49,6 +49,7 @@ const Comment = ({ postId }) => {
     }); // Body
     //
     alert("댓글 삭제"); // add api call for deleting comment
+    setCommentList(commentList.filter((comment) => comment.id !== commentId));
   };
 
   return (
@@ -56,7 +57,10 @@ const Comment = ({ postId }) => {
       <h1 className="text-3xl font-bold my-5">Comments</h1>
       <div>
         {commentList.map((comment) => (
-          <CommentElement comment={comment} />
+          <CommentElement
+            comment={comment}
+            handleCommentDelete={handleCommentDelete}
+          />
         ))}
       </div>
       <form

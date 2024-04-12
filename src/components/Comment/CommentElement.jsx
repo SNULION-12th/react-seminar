@@ -4,6 +4,8 @@ import { useParams } from "react-router-dom";
 const CommentElement = (props) => {
   const { postId } = useParams(); // Query Parameter를 찍기위해 추가
   const { comment } = props;
+  const { handleCommentDelete } = props;
+
   /* TODO: props 받기
        Hint: src/components/Comment/index.jsx에서 어떠한 props를 넘겨주는지 확인해보세요! */
 
@@ -28,15 +30,11 @@ const CommentElement = (props) => {
     // API 명세에 맞춰 console에 찍어보기 연습
     console.log(postId); // Query Parameter
     console.log({
-      content: "댓글 수정!!!",
+      content: "댓글 수정!!",
     }); // Body
     //
     alert("댓글 수정"); // add api call for editing comment
     setCommentInEdit(false);
-  };
-
-  const handleDeleteComment = () => {
-    alert("댓글 삭제"); // add api call for editing comment
   };
 
   useEffect(() => {
@@ -87,7 +85,14 @@ const CommentElement = (props) => {
             >
               수정
             </button>
-            <button onClick={handleDeleteComment}>삭제</button>
+            <button
+              onClick={() => {
+                setCommentInEdit(false);
+                handleCommentDelete(comment.id);
+              }}
+            >
+              삭제
+            </button>
           </>
         )}
       </div>
