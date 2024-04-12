@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 const CommentElement = ({
-  commentId,
+  key,
   comment,
   handleCommentDelete,
   editOriginalComment,

@@ -9,17 +9,7 @@ const Comment = ({ postId }) => {
   );
   // TODO: 새로운 댓글을 추가하기 위한 state를 만들어주세요
   const [commentInputValue, setCommentInputValue] = useState("");
-  const [newId, setNewID] = useState(4);
-  const [newComment, setNewComment] = useState({
-    id: 0,
-    content: "",
-    created_at: "",
-    post: postId,
-    author: {
-      id: 0,
-      username: "user0",
-    },
-  });
+  const [newId, setNewID] = useState(comments[comments.length - 1].id + 1);
 
   const handleNewComment = (e) => {
     setCommentInputValue(e.target.value);
@@ -38,10 +28,14 @@ const Comment = ({ postId }) => {
   const handleCommentSubmit = (e) => {
     e.preventDefault();
     const createdComment = {
-      ...newComment,
       id: newId,
       content: commentInputValue,
       created_at: Date.now(),
+      post: postId,
+      author: {
+        id: 0,
+        username: "user0",
+      },
     };
     setNewID(newId + 1);
     setCommentsList([...commentsList, createdComment]);
@@ -61,7 +55,7 @@ const Comment = ({ postId }) => {
       <h1 className="text-3xl font-bold my-5">Comments</h1>
       {commentsList.map((singleComment) => (
         <CommentElement
-          commentId={singleComment.id}
+          key={singleComment.id}
           comment={singleComment}
           handleCommentDelete={handleCommentDelete}
           editOriginalComment={editOriginalComment}
