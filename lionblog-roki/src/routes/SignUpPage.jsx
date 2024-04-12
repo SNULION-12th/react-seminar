@@ -12,7 +12,7 @@ const SignUpPage = () => {
 
 				<label required htmlFor="username" className="label">*유저 이름:</label>
         <input required type="text" id="username" className="input" />
-
+        
         <label htmlFor="password" className="label">*비밀번호:</label>
         <input required type="password" id="password" className="input" />
 

@@ -1,8 +1,10 @@
 import { SmallPost } from "../components/Posts";
 import posts from "../data/posts";
 import { Link } from "react-router-dom";
+import React, {useState} from "react";
 
 const HomePage = () => {
+  const [postId, setPostId] = useState(null);
 	const postList = posts;
 
   const handleChange = (e) => {};
@@ -22,7 +24,9 @@ const HomePage = () => {
       </div>
       <div className="grid grid-cols-4 px-10 mt-10">
         {postList.map((post) => (
-          <SmallPost key={post.id} post={post} />
+          <Link to={`${post.id}`} >
+            <SmallPost key={post.id} post={post} />
+          </Link>
         ))}
       </div>
       <div className="flex justify-center m-20">
