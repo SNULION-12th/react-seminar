@@ -1,6 +1,6 @@
 const SignUpPage = () => {
   const handleSignUpSubmit = () => {
-    alert("회원가입 하기"); // TODO: add api call for sign up
+    alert("회원가입 하기");
   };
   return (
     <div className="flex flex-col items-center w-1/2">
