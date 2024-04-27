@@ -56,6 +56,16 @@ const PostCreatePage = () => {
   };
 
   const onSubmit = (e) => {
+    e.preventDefault();
+    const createdPost = {
+      ...post,
+      like_users: [],
+      tags: post.tags.map((tag, idx) => {
+        return { id: idx + 1, content: tag };
+      }),
+    };
+    setPost(createdPost);
+    setIsSubmitted(true);
     alert("게시글을 등록합니다.");
     //TODO : api connect(create post)
   };
@@ -78,7 +88,11 @@ const PostCreatePage = () => {
     });
   };
 
-  return (
+  return isSubmitted ? (
+    <div className="flex flex-col items-center w-[60%] p-8">
+      <BigPost post={post} />
+    </div>
+  ) : (
     <div className="flex flex-col items-center w-3/5">
       <h3 className="font-bold text-4xl">게시글 작성</h3>
       <form className="form" onSubmit={onSubmit}>
