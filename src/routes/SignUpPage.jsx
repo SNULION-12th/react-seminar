@@ -1,4 +1,6 @@
 import { useState } from "react";
+import axios from "axios";
+import { signUp } from "../apis/api";
 
 const SignUpPage = () => {
   const [signUpData, setSignUpData] = useState({
@@ -15,11 +17,29 @@ const SignUpPage = () => {
     setSignUpData({ ...signUpData, [id]: value });
   };
 
-  const handleSignUpSubmit = (e) => {
+  const handleSignUpSubmit = async (e) => {
     e.preventDefault(); // to prevent reloading the page
-    console.log(signUpData);
-    alert("회원가입 하기"); // TODO: add api call for sign up
+    signUp(signUpData);
   };
+  // signUp함수에 formData를 전달하여 회원가입 요청
+
+  // const handleSignUpSubmit = async (e) => {
+  //   e.preventDefault(); // to prevent reloading the page
+  //   const response = await axios.post(
+  //     "http://localhost:8000/api/account/signup/",
+  //     signUpData,
+  //     {
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       withCredentials: true, // 추가
+  //     }
+  //   );
+  //   console.log(response);
+
+  //   // console.log(signUpData);
+  //   // alert("회원가입 하기"); // TODO: add api call for sign up
+  // };
 
   return (
     <div className="flex flex-col items-center w-1/2">
@@ -32,8 +52,8 @@ const SignUpPage = () => {
           required
           type="email"
           id="email"
-          className="input" 
-          value={signUpData.email} 
+          className="input"
+          value={signUpData.email}
           onChange={handleSignUpData}
         />
 
@@ -60,7 +80,6 @@ const SignUpPage = () => {
           value={signUpData.password}
           onChange={handleSignUpData}
         />
-
 
         <label htmlFor="confirm_password" className="label">
           *비밀번호 확인:
