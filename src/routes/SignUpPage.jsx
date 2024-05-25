@@ -32,8 +32,8 @@ const SignUpPage = () => {
           required
           type="email"
           id="email"
-          className="input" 
-          value={signUpData.email} 
+          className="input"
+          value={signUpData.email}
           onChange={handleSignUpData}
         />
 
@@ -60,7 +60,6 @@ const SignUpPage = () => {
           value={signUpData.password}
           onChange={handleSignUpData}
         />
-
 
         <label htmlFor="confirm_password" className="label">
           *비밀번호 확인:
