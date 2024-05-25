@@ -1,4 +1,7 @@
 import { useState } from "react";
+import { getCookie } from "../utils/cookie";
+import axios from "axios";
+import { signIn } from "../apis/api";
 
 const SignInPage = () => {
 	const [signInData, setSignInData] = useState({
@@ -11,10 +14,9 @@ const SignInPage = () => {
 		setSignInData({ ...signInData, [id]: value });
 	};
 
-	const handleSignInSubmit = (e) => {
+	const handleSignInSubmit = async (e) => {
 		e.preventDefault(); // to prevent reloading the page
-		console.log(signInData);
-		alert("로그인 하기"); // TODO: add api call for sign in
+		signIn(signInData);
 	};
 
 	return (
