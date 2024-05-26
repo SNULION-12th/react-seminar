@@ -113,7 +113,14 @@ export const updateComment = async (id, data) => {
 };
 
 // 과제 !!
-export const deleteComment = async (id) => {};
+export const deleteComment = async (id) => {
+  const response = await instanceWithToken.delete(`/comment/${id}/`);
+  if (response.status === 204) {
+    console.log("DELETE SUCCESS");
+  } else {
+    console.log("[ERROR] error while deleting comment");
+  }
+};
 
 export const getUser = async () => {
   const response = await instanceWithToken.get("/account/info/");
