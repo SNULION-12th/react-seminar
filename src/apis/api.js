@@ -110,12 +110,16 @@ export const getComments = async (postId) => {
 };
 
 export const createComment = async (data) => {
-  const response = await instanceWithToken.post("/comment/", data);
-  if (response.status === 201) {
-    console.log("COMMENT SUCCESS");
-    window.location.reload(); // 새로운 코멘트 생성시 새로고침으로 반영
-  } else {
-    console.log("[ERROR] error while creating comment");
+  try {
+    const response = await instanceWithToken.post("/comment/", data);
+    if (response.status === 201) {
+      console.log("COMMENT SUCCESS");
+      window.location.reload(); // 새로운 코멘트 생성시 새로고침으로 반영
+    } else {
+      console.log("[ERROR] error while creating comment");
+    }
+  } catch(error) {
+    console.log(error);
   }
 };
 
