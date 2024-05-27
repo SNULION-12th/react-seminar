@@ -5,7 +5,6 @@ import { getTags, createPost } from "../apis/api";
 import { useNavigate } from "react-router-dom";
 
 const PostCreatePage = () => {
-  const [isSubmitted, setIsSubmitted] = useState(false);
   const [post, setPost] = useState({
     title: "",
     content: "",
