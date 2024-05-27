@@ -4,12 +4,14 @@ import axios from "axios";
 import { getCookie } from "../utils/cookie";
 
 // baseURL, credential, 헤더 세팅
+//- 자주쓰는 설정들을 미리 한방에 default 로 세팅하기 -- 나중에 반복해서 쓸 것.
 axios.defaults.baseURL = "http://localhost:8000/api";
 axios.defaults.withCredentials = true;
 axios.defaults.headers.post["Content-Type"] = "application/json";
 axios.defaults.headers.common["X-CSRFToken"] = getCookie("csrftoken");
 
 // 누구나 접근 가능한 API들
+// 위에 설정한 것들 다 종합해서 instance 만들기
 export const instance = axios.create();
 
 // Token 있어야 접근 가능한 API들 - 얘는 토큰을 넣어줘야 해요
@@ -18,7 +20,6 @@ export const instanceWithToken = axios.create();
 // instanceWithToken에는 쿠키에서 토큰을 찾고 담아줍시다!
 instanceWithToken.interceptors.request.use(
   // 요청을 보내기전 수행할 일
-  // 사실상 이번 세미나에 사용할 부분은 이거밖에 없어요
   (config) => {
     const accessToken = getCookie("access_token");
 

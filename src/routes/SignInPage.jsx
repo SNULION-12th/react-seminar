@@ -1,6 +1,5 @@
 import { useState } from "react";
 import axios from "axios";
-import { getCookie } from "../utils/cookie";
 import { signIn } from "../apis/api";
 
 const SignInPage = () => {

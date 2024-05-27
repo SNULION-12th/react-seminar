@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { signUp } from "../apis/api";
-import { getCookie } from "../utils/cookie";
 import axios from "axios";
 
 const SignUpPage = () => {
@@ -23,7 +22,7 @@ const SignUpPage = () => {
     e.preventDefault();
     const response = await axios.post(
       "http://localhost:8000/api/account/signup/",
-      signUpData,
+      signUpData, //이 request 에서 나온 데이터를 여기다가 담겠다는 뜻
       {
         headers: {
           "Content-Type": "application/json",
