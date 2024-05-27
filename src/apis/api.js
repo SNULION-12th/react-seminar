@@ -74,7 +74,17 @@ export const deletePost = async (id, navigate) => {
 
 // 과제!!
 export const likePost = async (postId) => {
-  
+  try {
+    const response = await instanceWithToken.post(`/post/${postId}/like/`);
+    if(response.status === 200) {
+      console.log("LIKE SUCCESS");
+      window.location.reload();
+    } else {
+      console.log("[ERROR] error while liking post");
+    }
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 // Tag 관련 API들
@@ -121,5 +131,11 @@ export const updateComment = async (id, data) => {
 
 // 과제 !!
 export const deleteComment = async (id) => {
-
+  const response = await instanceWithToken.delete(`/comment/${id}/`);
+  if(response.status === 204) {
+    console.log("DELETE SUCCESS");
+    window.location.reload(); // 코멘트 삭제시 새로고침으로 반영
+  } else {
+    console.log("[ERROR] error while deleting comment");
+  }
 };
