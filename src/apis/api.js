@@ -120,8 +120,12 @@ export const updateComment = async (id, data) => {
       console.log("[ERROR] error while updating comment");
     }
 };
-  
-// 과제 !!
+
 export const deleteComment = async (id) => {
-  
+  const response = await instanceWithToken.delete(`/comment/${id}/`);
+  if (response.status === 204) {
+    console.log("DELETE SUCCESS");
+  } else {
+    console.log("[ERROR] error while deleting comment");
+  }
 };
