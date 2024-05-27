@@ -25,7 +25,8 @@ const Comment = ({ postId }) => {
 
     const handleCommentSubmit = (e) => {
         e.preventDefault();
-        createComment(newComment);
+        if (newComment.content.length > 0) createComment(newComment);
+        else alert('내용을 작성해주세요.');
     };
 
     const handleCommentDelete = async(commentId) => {
