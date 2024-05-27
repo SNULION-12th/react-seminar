@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 //import comments from "../../data/comments"; // dummy data
 import CommentElement from "./CommentElement";
 import { getComments, createComment, deleteComment } from "../../apis/api";
+import { getCookie } from "../../utils/cookie";
 
 const Comment = ({ postId }) => {
   const [commentList, setCommentList] = useState([]); // state for comments
@@ -9,6 +10,7 @@ const Comment = ({ postId }) => {
     post: postId,
     content: "",
   });
+  const [isUserLoggedIn, setIsUserLoggedIn] = useState(false); // 로그인 여부 상태, 우선 false로 초기화
 
   useEffect(() => {
     const getCommentsAPI = async () => {
@@ -16,6 +18,10 @@ const Comment = ({ postId }) => {
       setCommentList(comments);
     };
     getCommentsAPI();
+
+    // 로그인 여부 확인
+    const loggedIn = getCookie("access_token") ? true : false;
+    setIsUserLoggedIn(loggedIn);
   }, []);
 
   const handleChange = (e) => {
@@ -52,22 +58,24 @@ const Comment = ({ postId }) => {
         );
       })}
 
-      <form
-        className="flex flex-row mt-10 gap-3"
-        onSubmit={handleCommentSubmit}
-      >
-        <input
-          type="text"
-          value={comment.content}
-          placeholder="댓글을 입력해주세요"
-          className="input"
-          style={{ width: "calc(100% - 100px)" }}
-          onChange={handleChange}
-        />
-        <button type="submit" className="button">
-          작성
-        </button>
-      </form>
+      {isUserLoggedIn ? (
+        <form
+          className="flex flex-row mt-10 gap-3"
+          onSubmit={handleCommentSubmit}
+        >
+          <input
+            type="text"
+            value={comment.content}
+            placeholder="댓글을 입력해주세요"
+            className="input"
+            style={{ width: "calc(100% - 100px)" }}
+            onChange={handleChange}
+          />
+          <button type="submit" className="button">
+            작성
+          </button>
+        </form>
+      ) : null}
     </div>
   );
 };
