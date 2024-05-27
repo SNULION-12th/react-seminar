@@ -50,6 +50,8 @@ instanceWithToken.interceptors.response.use(
   (error) => {
     // 서버가 오류를 응답했을 때 처리 - 콘솔 찍어주고, 프론트에게 보내지 않고 오류를 발생시킴
     console.log("Response Error!!");
-    return Promise.reject(error);
+    //return Promise.reject(error);
+    alert(`${error}`);
+    return error;
   }
 );
