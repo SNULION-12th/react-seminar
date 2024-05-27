@@ -9,7 +9,6 @@ import { getCookie } from "../utils/cookie";
 const PostDetailPage = () => {
   const { postId } = useParams();
   const [post, setPost] = useState(null);
-
   const [user, setUser] = useState();
 
   useEffect(() => {
