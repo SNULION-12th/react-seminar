@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { updateComment } from "../../apis/api";
 
 const CommentElement = (props) => {
     const { comment, handleCommentDelete, postId } = props;
@@ -15,14 +16,10 @@ const CommentElement = (props) => {
     let day = date.getDate();
     day = day < 10 ? `0${day}` : day;
 
-    const handleEditComment = () => { // add api call for editing comment
+    const handleEditComment = async () => { // add api call for editing comment
         setContent(onChangeValue);
         setIsEdit(!isEdit);
-        console.log({
-            post: postId,
-            comment: comment.id,
-            content: content
-        });
+        await updateComment(comment.id, { content: onChangeValue });
     };
 
     useEffect(() => { // add api call to check if user is the author of the comment

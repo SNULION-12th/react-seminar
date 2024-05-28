@@ -53,6 +53,13 @@ export const getPosts = async () => {
   
   // 과제!!
   export const deletePost = async (id, navigate) => {
+    const response = await instanceWithToken.delete(`/post/${id}/`);
+    if (response.status === 204) {
+      console.log("POST DELETE SUCCESS");
+      navigate(-1);
+    } else {
+      console.log("[ERROR] error while deleting post");
+    }
     
   };
   
@@ -109,6 +116,13 @@ export const getComments = async (postId) => {
   
   // 과제 !!
   export const deleteComment = async (id) => {
+    const response = await instanceWithToken.delete(`/comment/${id}/`);
+    if (response.status === 204) {
+      console.log("COMMENT DELETE SUCCESS");
+      window.location.reload();
+    } else {
+      console.log("[ERROR] error while deleting comment");
+    }
   
   };
 
