@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import posts from "../data/posts";
 import { BigPost } from "../components/Posts";
+import { getPost } from "../apis/api";
 
 const PostEditPage = () => {
   const { postId } = useParams();
@@ -10,13 +11,9 @@ const PostEditPage = () => {
   const [tagInputValue, setTagInputValue] = useState("");
   const [autoCompletes, setAutoCompletes] = useState([]);
   const [post, setPost] = useState({
-    id: posts.length,
     title: "",
     content: "",
-    author: { id: posts.length, username: "아기사자" },
     tags: [],
-    like_users: [],
-    created_at: "2024-02-04T07:42:50.658501Z",
   });
 
   useEffect(() => {
@@ -31,9 +28,15 @@ const PostEditPage = () => {
   }, []);
 
   useEffect(() => {
-    const post = posts.find((post) => post.id === parseInt(postId));
-    const originalPost = { ...post, tags: post.tags.map((tag) => tag.content) };
-    setPost(originalPost);
+    const getPostAPI = async () => {
+      const post = await getPost(postId);
+      const postFormData = {
+        ...post,
+        tags: post.tags.map((tag) => tag.content),
+      };
+      setPost(postFormData);
+    };
+    getPostAPI();
   }, [postId]);
 
   const handleChange = (e) => {
