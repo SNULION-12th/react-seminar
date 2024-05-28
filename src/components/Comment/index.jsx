@@ -1,42 +1,52 @@
-import { useState } from "react";
-import comments from "../../data/comments"; // dummy data
+import { useEffect, useState } from "react";
 import CommentElement from "./CommentElement";
+import { createComment, deleteComment, getComments, getUser } from "../../apis/api";
 
 const Comment = ({ postId }) => {
-    const [commentList, setCommentList] = useState(comments); // state for comments
+    const [commentList, setCommentList] = useState([]); // state for comments
     const [newContent, setNewContent] = useState(""); // state for new comment
+    const [userId, setUserId] = useState(0);
 
-    const handleCommentSubmit = (e) => {
+    useEffect(() => {
+        const getCommentList = async () => {
+            const comment = await getComments(postId);
+            setCommentList(comment);
+        };
+        getCommentList();
+
+        getUser().then((response) => {
+            setUserId(response.id);
+        });
+        
+    }, []);
+
+    const handleCommentSubmit = async (e) => {
         e.preventDefault();
         setCommentList([ // TODO: add api call for creating comment
             ...commentList,
             {
-                id: commentList.length + 1,
-                content: newContent,
-                created_at: new Date().toISOString(),
                 post: postId,
-                author: {
-                    id: 1,
-                    username: "user1"
-                }
+                content: newContent,
+                author: userId,
             }
         ]);
-        console.log({
+        await createComment({
             post: postId,
-            content: newContent
+            content: newContent,
+            author: userId,
         });
         setNewContent("");
     };
 
-    const handleCommentDelete = (commentId) => {
-        console.log("comment: ", commentId);
-        setCommentList(commentList.filter((comment) => comment.id !== commentId)); // TODO: add api call for deleting comment
+    const handleCommentDelete = async (commentId) => {
+        await deleteComment(commentId);
+        setCommentList(commentList.filter((comment) => comment.id !== commentId));
     };
 
     return (
         <div className="w-full mt-5 self-start">
             <h1 className="text-3xl font-bold my-5">Comments</h1>
-            {commentList.map((comment) => {
+            {commentList?.map((comment) => {
                 return (
                     <CommentElement key={comment.id} comment={comment} handleCommentDelete={handleCommentDelete} postId={postId} />
                 );
