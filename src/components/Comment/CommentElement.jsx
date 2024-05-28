@@ -1,9 +1,12 @@
 import { useState, useEffect } from "react";
+import { getUser, updateComment } from "../../apis/api";
+import { getCookie } from "../../utils/cookie";
 
 const CommentElement = (props) => {
     const { comment, handleCommentDelete, postId } = props;
     const [content, setContent] = useState(comment.content);
     const [isEdit, setIsEdit] = useState(false);
+    const [user, setUser] = useState();
 
     const [onChangeValue, setOnChangeValue] = useState(content); // 수정 취소 시 직전 content 값으로 변경을 위한 state
 
@@ -15,8 +18,8 @@ const CommentElement = (props) => {
     let day = date.getDate();
     day = day < 10 ? `0${day}` : day;
 
-    const handleEditComment = () => { // add api call for editing comment
-        setContent(onChangeValue);
+    const handleEditComment = async () => { // add api call for editing comment
+        await updateComment(comment.id, {content: onChangeValue});
         setIsEdit(!isEdit);
         console.log({
             post: postId,
@@ -25,8 +28,17 @@ const CommentElement = (props) => {
         });
     };
 
-    useEffect(() => { // add api call to check if user is the author of the comment
+    useEffect(() => {
+        if (getCookie("access_token")) {
+            const getUserAPI = async () => {
+                const user = await getUser();
+                setUser(user);
+            };
+            getUserAPI();
+          } // add api call to check if user is the author of the comment
     }, []);
+    console.log(user?.id)
+    console.log(comment.author.id)
 
     return (
         <div className="w-full flex flex-row justify-between items-center mb-5">
@@ -39,7 +51,8 @@ const CommentElement = (props) => {
 
                 <span className="text-base text-gray-300">{year}.{month}.{day}</span>
             </div>
-
+            
+            {user?.id === comment?.author.id ? (
             <div className="flex flex-row items-center gap-3">
                 {isEdit ? (
                     <>
@@ -51,8 +64,8 @@ const CommentElement = (props) => {
                         <button onClick={() => handleCommentDelete(comment.id)}>삭제</button>
                         <button onClick={() => setIsEdit(!isEdit)}>수정</button>
                     </>
-                )}
-            </div>
+                ) }
+            </div> ) : null}
         </div>
     );
 };
