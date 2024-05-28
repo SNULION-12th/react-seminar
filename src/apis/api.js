@@ -1,6 +1,6 @@
 import { instance, instanceWithToken } from "./axios";
-import axios from "axios";
 
+// Account 관련 API들
 export const signIn = async (data) => {
   const response = await instance.post("/account/signin/", data);
   if (response.status === 200) {
@@ -20,6 +20,17 @@ export const signUp = async (data) => {
   return response;
 };
 
+export const getUser = async () => {
+  const response = await instanceWithToken.get("/account/info/");
+  if (response.status === 200) {
+    console.log("GET USER SUCCESS");
+  } else {
+    console.log("[ERROR] error while updating comment");
+  }
+  return response.data;
+};
+
+// 추가
 export const getPosts = async () => {
   const response = await instance.get("/post/");
   return response.data;
@@ -64,6 +75,7 @@ export const deletePost = async (id, navigate) => {
 // 과제!!
 export const likePost = async (postId) => {};
 
+// Tag 관련 API들
 export const getTags = async () => {
   const response = await instance.get("/tag/");
   return response.data;
@@ -78,6 +90,10 @@ export const createTag = async (data) => {
   }
   return response; // response 받아서 그 다음 처리
 };
+
+// 추가
+
+// Comment 관련 API들
 export const getComments = async (postId) => {
   const response = await instance.get(`/comment/?post=${postId}`);
   return response.data;
@@ -102,13 +118,14 @@ export const updateComment = async (id, data) => {
     console.log("[ERROR] error while updating comment");
   }
 };
-export const deleteComment = async (id) => {};
-export const getUser = async () => {
-  const response = await instanceWithToken.get("/account/info/");
-  if (response.status === 200) {
-    console.log("GET USER SUCCESS");
+
+// 과제 !!
+export const deleteComment = async (id) => {
+  const response = await instanceWithToken.delete(`/comment/${id}/`);
+  if (response.status === 204) {
+    console.log("DELETE SUCCESS");
+    window.location.reload();
   } else {
-    console.log("[ERROR] error while updating comment");
+    console.log("[ERROR] error while deleting post");
   }
-  return response.data;
 };

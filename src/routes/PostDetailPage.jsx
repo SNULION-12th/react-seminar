@@ -2,29 +2,30 @@ import { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { BigPost } from "../components/Posts";
 import Comment from "../components/Comment";
+
 import { getPost, getUser, deletePost } from "../apis/api";
 import { getCookie } from "../utils/cookie";
-
-import posts from "../data/posts";
 
 const PostDetailPage = () => {
   const { postId } = useParams();
   const [post, setPost] = useState(null);
-  const [user, setUser] = useState();
+
+  const [user, setUser] = useState(null);
+
   useEffect(() => {
     const getPostAPI = async () => {
-      const posts = await getPost(postId);
-      setPost(posts);
+      const post = await getPost(postId);
+      setPost(post);
     };
     getPostAPI();
   }, [postId]);
+
   useEffect(() => {
     // access_token이 있으면 유저 정보 가져옴
     if (getCookie("access_token")) {
       const getUserAPI = async () => {
         const user = await getUser();
         setUser(user);
-        console.log(user);
       };
       getUserAPI();
     }
@@ -34,6 +35,7 @@ const PostDetailPage = () => {
   const onClickDelete = async () => {
     const confirmDelete = window.confirm("정말 삭제하시겠습니까?");
     if (!confirmDelete) return;
+
     try {
       await deletePost(postId, navigate);
     } catch (error) {
