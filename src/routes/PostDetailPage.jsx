@@ -4,12 +4,13 @@ import { BigPost } from "../components/Posts";
 import Comment from "../components/Comment";
 import { getPost, getUser, deletePost } from "../apis/api";
 import { getCookie } from "../utils/cookie";
+import axios from "axios";
 
 const PostDetailPage = () => {
   const { postId } = useParams();
   const [user, setUser] = useState();
-
   const [post, setPost] = useState(null);
+
   useEffect(() => {
     const getPostAPI = async () => {
       const post = await getPost(postId);
