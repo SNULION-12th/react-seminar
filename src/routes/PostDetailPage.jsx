@@ -44,6 +44,7 @@ const PostDetailPage = () => {
     }
   };
 
+
   return (
     post && (
       <div className="flex flex-col items-center w-[60%] p-8">
