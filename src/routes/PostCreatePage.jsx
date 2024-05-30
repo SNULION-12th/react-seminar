@@ -5,7 +5,6 @@ import { getTags, createPost } from "../apis/api";
 import { useNavigate } from "react-router-dom";
 
 const PostCreatePage = () => {
-  const [isSubmitted, setIsSubmitted] = useState(false);
   const [post, setPost] = useState({
     title: "",
     content: "",
@@ -83,7 +82,7 @@ const PostCreatePage = () => {
   const onSubmit = (e) => {
     e.preventDefault();
     createPost(post, navigate);
-  }
+  };
 
   return (
     <div className="flex flex-col items-center w-3/5">

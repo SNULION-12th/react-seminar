@@ -1,13 +1,13 @@
 import axios from "axios";
 import { getCookie } from "../utils/cookie";
 
-// baseURL, credential, 헤더 세팅 
-axios.defaults.baseURL = 'http://localhost:8000/api';
+// baseURL, credential, 헤더 세팅
+axios.defaults.baseURL = "http://localhost:8000/api";
 axios.defaults.withCredentials = true;
-axios.defaults.headers.post['Content-Type'] = 'application/json';
-axios.defaults.headers.common['X-CSRFToken'] = getCookie('csrftoken');
+axios.defaults.headers.post["Content-Type"] = "application/json";
+axios.defaults.headers.common["X-CSRFToken"] = getCookie("csrftoken");
 
-// 누구나 접근 가능한 API들 
+// 누구나 접근 가능한 API들
 export const instance = axios.create();
 
 // Token 있어야 접근 가능한 API들 - 얘는 토큰을 넣어줘야 해요
@@ -16,13 +16,14 @@ export const instanceWithToken = axios.create();
 // instanceWithToken에는 쿠키에서 토큰을 찾고 담아줍시다!
 instanceWithToken.interceptors.request.use(
   // 요청을 보내기전 수행할 일
-  // 사실상 이번 세미나에 사용할 부분은 이거밖에 없어요 
+  // 사실상 이번 세미나에 사용할 부분은 이거밖에 없어요
   (config) => {
-    const accessToken = getCookie('access_token');
+    const accessToken = getCookie("access_token");
 
     if (!accessToken) {
       // token 없으면 리턴
-      return;
+      alert("Please login first.");
+      throw new Error("No Token");
     } else {
       // token 있으면 헤더에 담아주기 (Authorization은 장고에서 JWT 토큰을 인식하는 헤더 key)
       config.headers["Authorization"] = `Bearer ${accessToken}`;
@@ -40,7 +41,7 @@ instanceWithToken.interceptors.request.use(
 
 instanceWithToken.interceptors.response.use(
   (response) => {
-    // 서버 응답 데이터를 프론트에 넘겨주기 전 수행할 일 
+    // 서버 응답 데이터를 프론트에 넘겨주기 전 수행할 일
     console.log("Interceptor Response!!");
     return response;
   },
