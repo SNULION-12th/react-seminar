@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { getUser } from "../../apis/api";
 import { getCookie } from "../../utils/cookie";
 import { updateComment, getPost, getUser } from "../../apis/api";
 
@@ -60,7 +59,7 @@ const CommentElement = (props) => {
       </div>
 
       <div className="flex flex-row items-center gap-3">
-        {getCookie("access_token") ? (
+        {user?.id === comment?.author.id ? (
           isEdit ? (
             <>
               <button
