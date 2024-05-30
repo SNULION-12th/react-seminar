@@ -17,6 +17,7 @@ const PostDetailPage = () => {
     };
     getPostAPI();
   }, [postId]);
+
   // 작성했던 getPost()를 호출한 후, setPostList를 통해 postList에 저장
   useEffect(() => {
     // access_token이 있으면 유저 정보 가져옴

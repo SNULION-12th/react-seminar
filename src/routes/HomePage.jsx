@@ -16,6 +16,7 @@ const HomePage = () => {
       setPostList(posts);
     };
     getPostsAPI();
+
     const getTagsAPI = async () => {
       const tags = await getTags();
       const tagContents = tags.map((tag) => {
