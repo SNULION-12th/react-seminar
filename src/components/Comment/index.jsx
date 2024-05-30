@@ -1,7 +1,12 @@
 import { useEffect, useState } from "react";
 //import comments from "../../data/comments"; // dummy data
 import CommentElement from "./CommentElement";
-import { getComments, createComment, getUser } from "../../apis/api";
+import {
+  getComments,
+  createComment,
+  getUser,
+  deleteComment,
+} from "../../apis/api";
 import { getCookie } from "../../utils/cookie";
 
 const Comment = ({ postId }) => {
@@ -25,9 +30,14 @@ const Comment = ({ postId }) => {
     setNewContent("");
   };
 
-  const handleCommentDelete = (commentId) => {
-    console.log("comment: ", commentId);
-    setCommentList(commentList.filter((comment) => comment.id !== commentId)); // TODO: add api call for deleting comment
+  const handleCommentDelete = async (commentId) => {
+    const confirmDelete = window.confirm("정말 삭제하시겠습니까?");
+    if (!confirmDelete) return;
+    try {
+      await deleteComment(commentId);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
