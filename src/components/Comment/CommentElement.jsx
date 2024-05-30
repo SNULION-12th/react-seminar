@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
+import { getCookie } from "../../utils/cookie";
+import { getUser, updateComment } from "../../apis/api";
 
-const CommentElement = (props) => {
-    const { comment, handleCommentDelete, postId } = props;
-    const [content, setContent] = useState(comment.content);
+const CommentElement = ({ comment, handleCommentDelete }) => {
     const [isEdit, setIsEdit] = useState(false);
-
-    const [onChangeValue, setOnChangeValue] = useState(content); // 수정 취소 시 직전 content 값으로 변경을 위한 state
-
+    const [onChangeValue, setOnChangeValue] = useState(comment.content); // 수정 취소 시 직전 content 값으로 변경을 위한 state
+    const [user, setUser] = useState();
+    
     // comment created_at 전처리
     const date = new Date(comment.created_at);
     const year = date.getFullYear();
@@ -15,18 +15,24 @@ const CommentElement = (props) => {
     let day = date.getDate();
     day = day < 10 ? `0${day}` : day;
 
-    const handleEditComment = () => { // add api call for editing comment
-        setContent(onChangeValue);
-        setIsEdit(!isEdit);
-        console.log({
-            post: postId,
-            comment: comment.id,
-            content: content
-        });
-    };
+    useEffect(() => {
+        // access_token이 있으면 유저 정보 가져옴
+        const fetchUser = async () => { 
 
-    useEffect(() => { // add api call to check if user is the author of the comment
-    }, []);
+            try { if (getCookie("access_token")) 
+            
+            { const user = await getUser(); setUser(user); }
+            
+            } catch (error) { console.error("Error fetching user:", error); }
+            
+            }; 
+            
+            fetchUser();
+      }, []);
+
+    const handleEditComment = () => { // add api call for editing comment
+        updateComment(comment.id, { content: onChangeValue})
+        };
 
     return (
         <div className="w-full flex flex-row justify-between items-center mb-5">
@@ -34,24 +40,23 @@ const CommentElement = (props) => {
                 {isEdit ? (
                     <input className="input mb-2" value={onChangeValue} onChange={(e) => setOnChangeValue(e.target.value)} />
                 ) : (
-                    <p className="text-lg">{content}</p>
+                    <p className="text-lg">{comment.content}</p>
                 )}
 
                 <span className="text-base text-gray-300">{year}.{month}.{day}</span>
             </div>
-
             <div className="flex flex-row items-center gap-3">
                 {isEdit ? (
                     <>
-                        <button onClick={() => { setIsEdit(!isEdit); setOnChangeValue(content); }}>취소</button>
+                        <button onClick={() => { setIsEdit(!isEdit); setOnChangeValue(comment.content); }}>취소</button>
                         <button onClick={handleEditComment}>완료</button>
                     </>
-                ) : (
+                ) : user?.id === comment?.author ? (
                     <>
                         <button onClick={() => handleCommentDelete(comment.id)}>삭제</button>
                         <button onClick={() => setIsEdit(!isEdit)}>수정</button>
                     </>
-                )}
+                ) : null}
             </div>
         </div>
     );

@@ -4,15 +4,13 @@ import { BigPost } from "../components/Posts";
 import Comment from "../components/Comment";
 import { getPost, getUser, deletePost } from "../apis/api";
 import { getCookie } from "../utils/cookie";
-
 const PostDetailPage = () => {
 
 	const { postId } = useParams();
 
   const [post, setPost] = useState(null);
-
-  const [user, setUser] = useState()
-
+  const [user, setUser] = useState();
+  
   useEffect(() => {
     // access_token이 있으면 유저 정보 가져옴
     if (getCookie("access_token")) {
@@ -31,6 +29,7 @@ const PostDetailPage = () => {
     };
     getPostAPI();
   }, [postId]);
+
 	// 작성했던 getPost()를 호출한 후, setPostList를 통해 postList에 저장
   const navigate = useNavigate();
   const onClickDelete = async () => {
