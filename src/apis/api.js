@@ -65,7 +65,6 @@ export const deletePost = async (id, navigate) => {
 };
 
 // 과제!!
-export const likePost = async (postId) => {};
 
 // 추가
 
@@ -132,4 +131,18 @@ export const getUser = async () => {
     console.log("[ERROR] error while updating comment");
   }
   return response.data;
+};
+
+export const likePost = async (postId) => {
+  try {
+    const response = await instanceWithToken.post(`/post/${postId}/like/`);
+    if (response.status === 200) {
+      console.log("LIKE POST SUCCESS");
+      window.location.reload();
+    } else {
+      console.log("[ERROR] error while liking post");
+    }
+  } catch (error) {
+    console.error("Error liking post:", error);
+  }
 };
