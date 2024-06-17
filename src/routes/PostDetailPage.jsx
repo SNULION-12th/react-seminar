@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { BigPost } from "../components/Posts";
 import Comment from "../components/Comment";
-import { getPost, getUser } from "../apis/api";
+import { getPost, deletePost, getUser } from "../apis/api";
 import { getCookie } from "../utils/cookie";
 
 const PostDetailPage = () => {
@@ -28,6 +28,7 @@ const PostDetailPage = () => {
       getUserAPI();
     }
   }, []);
+
   const navigate = useNavigate();
   const onClickDelete = async () => {
     const confirmDelete = window.confirm("정말 삭제하시겠습니까?");
@@ -43,7 +44,6 @@ const PostDetailPage = () => {
     post && (
       <div className="flex flex-col items-center w-[60%] p-8">
         <BigPost post={post} />
-
         <Comment postId={postId} />
         <div className="flex flex-row gap-3">
           {user?.id === post?.author.id ? (
