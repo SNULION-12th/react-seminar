@@ -2,9 +2,9 @@ import { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { BigPost } from "../components/Posts";
 import Comment from "../components/Comment";
-import { getPost, getUser } from "../apis/api";
+import { getPost, getUser, deletePost } from "../apis/api";
 import { getCookie } from "../utils/cookie";
-import posts from "../data/posts";
+//import posts from "../data/posts";
 
 const PostDetailPage = () => {
   const { postId } = useParams();
@@ -20,10 +20,12 @@ const PostDetailPage = () => {
   }, [postId]);
   // 작성했던 getPost()를 호출한 후, setPostList를 통해 postList에 저장
 
+  /*
   useEffect(() => {
     const post = posts.find((post) => post.id === parseInt(postId));
     setPost(post);
   }, [postId]);
+  */
 
   useEffect(() => {
     // access_token이 있으면 유저 정보 가져옴

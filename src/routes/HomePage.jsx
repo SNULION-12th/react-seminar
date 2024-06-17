@@ -55,6 +55,8 @@ const HomePage = () => {
     }
   };
 
+  console.log(getCookie("access token"));
+
   return (
     <div>
       <div className="flex flex-col justify-center items-center mb-5">
