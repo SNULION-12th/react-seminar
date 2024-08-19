@@ -105,14 +105,22 @@ export const updateComment = async (id, data) => {
   const response = await instanceWithToken.put(`/comment/${id}/`, data); // 혹시 patch로 구현했다면 .patch
   if (response.status === 200) {
     console.log("COMMENT UPDATE SUCCESS");
-    window.location.reload();
+    //    window.location.reload();
   } else {
     console.log("[ERROR] error while updating comment");
   }
 };
 
 // 과제 !!
-export const deleteComment = async (id) => {};
+export const deleteComment = async (id) => {
+  const response = await instanceWithToken.delete(`/comment/${id}/`);
+  if (response.status === 204) {
+    console.log("COMMENT DELETE SUCCESS");
+    //    window.location.reload();
+  } else {
+    console.log("[ERROR] error while deleting comment");
+  }
+};
 
 export const getUser = async () => {
   const response = await instanceWithToken.get("/account/info/");
