@@ -5,8 +5,6 @@ import { getPost, getUser, deletePost } from "../apis/api";
 import { getCookie } from "../utils/cookie";
 import Comment from "../components/Comment";
 
-import posts from "../data/posts";
-
 const PostDetailPage = () => {
   const { postId } = useParams();
   const [post, setPost] = useState();

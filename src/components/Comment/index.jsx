@@ -1,36 +1,40 @@
-import { useState } from "react";
-import comments from "../../data/comments"; // dummy data
+import { useState, useEffect } from "react";
+import { getComments, createComment, deleteComment } from "../../apis/api"; // dummy data
 import CommentElement from "./CommentElement";
+import { getCookie } from "../../utils/cookie"
 
 const Comment = ({ postId }) => {
-    const [commentList, setCommentList] = useState(comments); // state for comments
-    const [newContent, setNewContent] = useState(""); // state for new comment
+    const [commentList, setCommentList] = useState([]); // state for comments
+    const [newContent, setNewContent] = useState({
+        post: postId,
+        content: "",
+    });
+    const [isSignedIn, setIsSignedIn] = useState(false); // state for new comment
 
-    const handleCommentSubmit = (e) => {
+    useEffect(() => {
+        const getCommentsAPI = async () => {
+            const comments = await getComments(postId);
+            setCommentList(comments);
+        };
+        getCommentsAPI();
+        const signIn = getCookie("access_token") ? true : false;
+        setIsSignedIn(signIn);
+    }, []);
+
+    const handleCommentSubmit = async (e) => {
         e.preventDefault();
-        setCommentList([ // TODO: add api call for creating comment
-            ...commentList,
-            {
-                id: commentList.length + 1,
-                content: newContent,
-                created_at: new Date().toISOString(),
-                post: postId,
-                author: {
-                    id: 1,
-                    username: "user1"
-                }
-            }
-        ]);
-        console.log({
-            post: postId,
-            content: newContent
-        });
+        await createComment({post: postId, content: newContent});
         setNewContent("");
     };
 
-    const handleCommentDelete = (commentId) => {
-        console.log("comment: ", commentId);
-        setCommentList(commentList.filter((comment) => comment.id !== commentId)); // TODO: add api call for deleting comment
+    const handleCommentDelete = async(commentId) => {
+        const confirmDelete = window.confirm("정말 삭제하시겠습니까?");
+        if (!confirmDelete) return;
+            try {
+                await deleteComment(commentId);
+            } catch (error) {
+                console.error(error);
+            } // TODO: add api call for deleting comment
     };
 
     return (
@@ -42,10 +46,11 @@ const Comment = ({ postId }) => {
                 );
             })}
             
+            {isSignedIn ? (
             <form className="flex flex-row mt-10 gap-3" onSubmit={handleCommentSubmit}>
-                <input type="text" value={newContent} placeholder="댓글을 입력해주세요" className="input" style={{ width: "calc(100% - 100px)" }} onChange={(e) => setNewContent(e.target.value)} />
+                <input type="text" value={newContent.content} placeholder="댓글을 입력해주세요" className="input" style={{ width: "calc(100% - 100px)" }} onChange={(e) => setNewContent(e.target.value)} />
                 <button type="submit" className="button">작성</button>
-            </form>
+            </form> ) : null }
         </div>
     );
 };
